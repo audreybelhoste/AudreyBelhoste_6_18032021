@@ -1,0 +1,26 @@
+.content{
+	max-width: $container;
+	margin: 0 auto;
+
+	&__title{
+		position: absolute; 
+		color: $brand-primary;
+		margin: 0;
+		font-size: 14px;
+		top: 50px;
+		right: 20px;
+
+		@extend .font-regular;
+
+		@include laptop{
+			right: 20px;
+			font-size: 30px;
+			top: 40px;
+		}
+
+		@include desktop{
+			right: calc((100% - #{$container}) / 2);
+			font-size: 36px;
+		}
+	}
+}
