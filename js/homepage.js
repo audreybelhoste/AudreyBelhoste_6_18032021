@@ -36,10 +36,13 @@ function showPhotographers(data){
 		var image = document.createElement('img');
 
 		card.classList.add("content__card")
+		card.setAttribute("data-tags", photographers[i].tags);
 
 		imageContainer.classList.add("content__card__image");
 
 		image.src = 'Sample Photos/Photographers ID Photos/' + photographers[i].portrait;
+
+		link.setAttribute('href', 'photographer.html?id=' + photographers[i].id);
 
 		cardTitle.textContent = photographers[i].name;
 		cardTitle.classList.add("content__card__title");
@@ -63,12 +66,37 @@ function showPhotographers(data){
 
 		main.appendChild(card);
 		card.appendChild(link);
-		card.appendChild(imageContainer);
+		link.appendChild(imageContainer);
 		imageContainer.appendChild(image);
 		card.appendChild(cardTitle);
 		card.appendChild(cardLocation);
 		card.appendChild(cardDescription);
 		card.appendChild(cardPrice);
 		card.appendChild(cardList);
+	}
+}
+
+var filters = document.querySelectorAll(".header__navigation__item");
+filters.forEach(function(item) {
+	item.addEventListener('click', function() {
+		var filter = item.getAttribute('data-filter');
+		var tag = item.getAttribute('data-filter-tag');
+
+		filterTag(tag);
+	})
+})
+
+function filterTag(tag) {
+	var items = document.querySelectorAll('.content__card');
+
+	for (var i = 0; i < items.length; i++){
+		var itemTags = items[i].getAttribute('data-tags');
+		items[i].setAttribute('data-toggle', 'on');
+
+		if (itemTags != null) {
+			if (itemTags.indexOf(tag) < 0) {
+			  items[i].setAttribute('data-toggle', 'off');
+			}
+		  }
 	}
 }

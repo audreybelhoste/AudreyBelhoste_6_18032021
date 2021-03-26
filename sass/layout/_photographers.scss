@@ -37,11 +37,8 @@
 		margin: 0 auto 30px;
 
 		@include laptop{
-			margin: 0 0 30px;
+			margin: 0 calc((100% - 3 * 263px) / 6) 30px;
 
-			&:nth-of-type(3n - 1){
-				margin: 0 calc((100% - 3 * 263px) / 2) 30px;
-			}
 		}
 
 		&__image{
@@ -101,5 +98,14 @@
 			color: $brand-primary;
 			margin-bottom: 6px;
 		}
+	}
+
+	[data-toggle='on'] {
+		display:block;
+	  }
+	  
+	[data-toggle='off'] {
+		display:none;
+		visibility: hidden;
 	}
 }
