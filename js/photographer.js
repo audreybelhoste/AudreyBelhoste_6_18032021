@@ -80,13 +80,15 @@ function createAMedia(id, photographerId, link, tags, likes, date, price){
 			likes : likes, 
 			date : date, 
 			price : price, 
-			title :  link.replace('.jpg', '').replaceAll('_', ' '),
+			title :  link.replace('.mp4', '').replaceAll('_', ' '),
 			type: 'video'
 		}
 	}
 }
 
 function showMedia(data){
+	var mediaSection = document.querySelector('#media');
+
 	var media = data['media'];
 	mediaList = [];
 
@@ -95,5 +97,39 @@ function showMedia(data){
 		mediaList.push(newMedia);
 	}
 
-	console.log(mediaList);
+	for(var i = 0; i < mediaList.length; i++){
+
+		if(mediaList[i].photographerId == url.get('id')){
+			var card = document.createElement('div');
+			var mediaContainer = document.createElement('div');
+			var media = document.createElement(mediaList[i].type);
+			var details = document.createElement('div');
+			var title = document.createElement('p');
+			var price = document.createElement('p');
+			var likes = document.createElement('p');
+
+			card.classList.add("media__card");
+
+			mediaContainer.classList.add("media__card__media");
+			
+			media.src = 'Sample Photos/' + mediaList[i].photographerId + "/" + mediaList[i].link;
+
+			details.classList.add("media__card__details");
+
+			title.textContent = mediaList[i].title;
+
+			price.textContent = mediaList[i].price + ' €';
+
+			likes.textContent = mediaList[i].likes;
+			
+			mediaSection.appendChild(card);
+			card.appendChild(mediaContainer);
+			mediaContainer.appendChild(media);
+			card.appendChild(details);
+			details.appendChild(title);
+			details.appendChild(price); 
+			details.appendChild(likes);
+			
+		}
+	}
 }

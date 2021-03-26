@@ -581,4 +581,34 @@ html, body {
   object-fit: cover;
 }
 
+.media {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.media__card {
+  max-width: 350px;
+}
+.media__card__media {
+  width: 350px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+.media__card__media img, .media__card__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.media__card__details {
+  display: flex;
+  justify-content: space-between;
+  color: #901C1C;
+  font-size: 24px;
+}
+
 /*# sourceMappingURL=main.css.map */
