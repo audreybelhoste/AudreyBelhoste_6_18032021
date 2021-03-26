@@ -8,21 +8,29 @@ fetch(jsonFile)
 	showPhotographers(data);
 })
 
-function photographer(name, id, city, country, tags, tagline, price, portrait){
-	this.name = name,
-	this.id = id, 
-	this.city = city, 
-	this.country = country, 
-	this.tags = tags, 
-	this.tagline = tagline, 
-	this.price = price, 
-	this.portrait = portrait
+function createAPhotographer(name, id, city, country, tags, tagline, price, portrait){
+	return {
+		name,
+		id, 
+		city, 
+		country, 
+		tags, 
+		tagline, 
+		price, 
+		portrait
+	}
 }
 
 function showPhotographers(data){
 	var main = document.querySelector('main');
 
-	var photographers = data['photographers'];
+	// var photographers = data['photographers'];
+
+	var photographers = [];
+
+	data['photographers'].forEach(element => {
+		photographers.push(createAPhotographer(element.name, element.id, element.city, element.country, element.tags, element.tagline, element.price, element.portrait))
+	});
 	
 	for(var i = 0; i < photographers.length; i++){
 		var card = document.createElement('div');

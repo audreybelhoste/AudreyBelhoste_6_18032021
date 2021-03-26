@@ -1,0 +1,62 @@
+.presentation{
+	display: flex;
+	max-width: 1200px;
+	margin: 0 auto;
+	justify-content: space-between;
+	align-items: center;
+	padding: 50px;
+
+	&__name{
+		color: $brand-text-secondary;
+		font-size: 64px;
+		margin: 0;
+
+		@extend .font-regular; 
+	}
+
+	&__location{
+		color: $brand-primary;
+		font-size: 24px;
+		margin: 0;
+	}
+
+	&__description{
+		color: $brand-text2;
+		font-size: 18px;
+		margin: 0;
+	}
+
+	ul{
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		margin: 8px 0 0;
+		padding: 0;
+	}
+
+	&__tag{
+		border: 0.5px solid $brand-grey;
+		border-radius: 12px;
+		padding: 3px 7px; 
+		margin-right: 5px;
+		font-size: 18px;
+		color: $brand-primary;
+		margin-bottom: 6px;
+
+		@extend .font-medium;
+	}
+
+	&__image{
+		width: 200px;
+		height: 200px;
+		position: relative;
+		overflow: hidden;
+		border-radius: 50%;
+
+		img{
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}
