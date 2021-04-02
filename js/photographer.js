@@ -86,11 +86,13 @@ function createAMedia(id, photographerId, link, tags, likes, date, price){
 	}
 }
 
+mediaList = [];
+gallery = [];
+
 function showMedia(data){
 	var mediaSection = document.querySelector('#media');
 
 	var media = data['media'];
-	mediaList = [];
 
 	for(var i = 0; i < media.length; i++){
 		newMedia = createAMedia(media[i].id, media[i].photographerId, media[i].image || media[i].video, media[i].tags, media[i].likes, media[i].date, media[i].price);
@@ -113,7 +115,8 @@ function showMedia(data){
 			mediaContainer.classList.add("media__card__container");
 			
 			media.src = 'Sample Photos/' + mediaList[i].photographerId + "/" + mediaList[i].link;
-			media.classList.add("media__card__media")
+			media.classList.add("media__card__media");
+			media.setAttribute("data-id", mediaList[i].id);
 
 			details.classList.add("media__card__details");
 
@@ -130,7 +133,8 @@ function showMedia(data){
 			details.appendChild(title);
 			details.appendChild(price); 
 			details.appendChild(likes);
-			
+
+			gallery.push(mediaList[i]);
 		}
 	}
 
@@ -138,15 +142,19 @@ function showMedia(data){
 		
 		static init () {
 			const links = Array.from(document.querySelectorAll(".media__card__media"));
-			const gallery = links.map(link => link.getAttribute('src'));
 			links.forEach(function(link) {
 				link.addEventListener('click', function(e) {
 					e.preventDefault();
-					new Lightbox(e.currentTarget.getAttribute('src'), gallery);
+					for(var i = 0; i < mediaList.length; i++){
+						if(mediaList[i].id == e.currentTarget.getAttribute('data-id')){
+							var currentMedia = mediaList[i];
+						}
+					}
+					new Lightbox(currentMedia, gallery);
 				})
 			})
 		}
-
+	
 		constructor(url, gallery) {
 			this.element = this.buildDOM(url);
 			this.loadImage(url);
@@ -155,7 +163,7 @@ function showMedia(data){
 			document.body.appendChild(this.element);
 			document.addEventListener('keyup', this.onKeyUp);
 		}
-
+	
 		onKeyUp(e) {
 			if( e.key == 'Escape') {
 				this.close(e);
@@ -165,53 +173,55 @@ function showMedia(data){
 				this.next(e);
 			}
 		}
-
+	
 		close(e) {
 			e.preventDefault();
 			this.element.remove();
 			document.removeEventListener('keyup', this.onKeyUp);
 		}
-
+	
 		next(e) {
-			e.preventDefault();
-			let i = this.gallery.findIndex(media => media === this.url);
-			if (i == this.gallery.length - 1) {
+			e.preventDefault; 
+			let i = this.gallery.findIndex(media => media === this.currentMedia);
+			if (i === this.gallery.length - 1) {
 				i = -1;
 			}
 			this.loadImage(this.gallery[i + 1]);
 		}
-
+	
 		prev(e) {
 			e.preventDefault();
-			let i = this.gallery.findIndex(media => media === this.url);
+			let i = this.gallery.findIndex(media => media === this.currentMedia);
 			if (i == 0) {
 				i = this.gallery.length;
 			}
 			this.loadImage(this.gallery[i - 1]);
 		}
-
-		loadImage(url) {
-			this.url = null
-			const image = new Image()
+	
+		loadImage(currentMedia) {
+			this.currentMedia = null;
 			const container = this.element.querySelector('.lightbox__container')
+			media = document.createElement(currentMedia.type);
+			title = document.createElement('p');
+			title.textContent = currentMedia.title;
 			container.innerHTML = '';
-			image.onload = () => {
-			  container.appendChild(image)
-			  this.url = url
-			}
-			image.src = url
+			container.appendChild(media);
+			container.appendChild(title);
+			media.src = 'Sample Photos/' + currentMedia.photographerId + "/" + currentMedia.link;
+			this.currentMedia = currentMedia;
 		}
-
-		buildDOM(url) {
+	
+		buildDOM() {
 			const dom = document.createElement('div');
 			dom.classList.add('lightbox');
-			dom.innerHTML = ' <button class="lightbox__close">Fermer</button> <button class="lightbox__next">Suivant</button> <button class="lightbox__prev">Précédent</button> <div class="lightbox__container"></div>'
+			dom.innerHTML = '<button class="lightbox__close">Fermer</button> <button class="lightbox__next">Suivant</button> <button class="lightbox__prev">Précédent</button> <div class="lightbox__container"></div>'
 			dom.querySelector('.lightbox__close').addEventListener('click', this.close.bind(this));
 			dom.querySelector('.lightbox__next').addEventListener('click', this.next.bind(this));
 			dom.querySelector('.lightbox__prev').addEventListener('click', this.prev.bind(this));
 			return dom;
 		}
 	}
-
+	
 	Lightbox.init();
 }
+
