@@ -110,9 +110,10 @@ function showMedia(data){
 
 			card.classList.add("media__card");
 
-			mediaContainer.classList.add("media__card__media");
+			mediaContainer.classList.add("media__card__container");
 			
 			media.src = 'Sample Photos/' + mediaList[i].photographerId + "/" + mediaList[i].link;
+			media.classList.add("media__card__media")
 
 			details.classList.add("media__card__details");
 
@@ -132,4 +133,85 @@ function showMedia(data){
 			
 		}
 	}
+
+	class Lightbox {
+		
+		static init () {
+			const links = Array.from(document.querySelectorAll(".media__card__media"));
+			const gallery = links.map(link => link.getAttribute('src'));
+			links.forEach(function(link) {
+				link.addEventListener('click', function(e) {
+					e.preventDefault();
+					new Lightbox(e.currentTarget.getAttribute('src'), gallery);
+				})
+			})
+		}
+
+		constructor(url, gallery) {
+			this.element = this.buildDOM(url);
+			this.loadImage(url);
+			this.gallery = gallery;
+			this.onKeyUp = this.onKeyUp.bind(this);
+			document.body.appendChild(this.element);
+			document.addEventListener('keyup', this.onKeyUp);
+		}
+
+		onKeyUp(e) {
+			if( e.key == 'Escape') {
+				this.close(e);
+			} else if ( e.key == 'ArrowLeft') {
+				this.prev(e);
+			} else if (e.key == 'ArrowRight') {
+				this.next(e);
+			}
+		}
+
+		close(e) {
+			e.preventDefault();
+			this.element.remove();
+			document.removeEventListener('keyup', this.onKeyUp);
+		}
+
+		next(e) {
+			e.preventDefault();
+			let i = this.gallery.findIndex(media => media === this.url);
+			if (i == this.gallery.length - 1) {
+				i = -1;
+			}
+			this.loadImage(this.gallery[i + 1]);
+		}
+
+		prev(e) {
+			e.preventDefault();
+			let i = this.gallery.findIndex(media => media === this.url);
+			if (i == 0) {
+				i = this.gallery.length;
+			}
+			this.loadImage(this.gallery[i - 1]);
+		}
+
+		loadImage(url) {
+			this.url = null
+			const image = new Image()
+			const container = this.element.querySelector('.lightbox__container')
+			container.innerHTML = '';
+			image.onload = () => {
+			  container.appendChild(image)
+			  this.url = url
+			}
+			image.src = url
+		}
+
+		buildDOM(url) {
+			const dom = document.createElement('div');
+			dom.classList.add('lightbox');
+			dom.innerHTML = ' <button class="lightbox__close">Fermer</button> <button class="lightbox__next">Suivant</button> <button class="lightbox__prev">Précédent</button> <div class="lightbox__container"></div>'
+			dom.querySelector('.lightbox__close').addEventListener('click', this.close.bind(this));
+			dom.querySelector('.lightbox__next').addEventListener('click', this.next.bind(this));
+			dom.querySelector('.lightbox__prev').addEventListener('click', this.prev.bind(this));
+			return dom;
+		}
+	}
+
+	Lightbox.init();
 }
