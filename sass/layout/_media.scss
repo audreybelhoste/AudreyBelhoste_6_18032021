@@ -1,20 +1,33 @@
 .media{
 	max-width: 1200px;
-	margin: 0 auto;
+	margin: 40px auto 0;
 	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
+	flex-direction: column;
+	padding: 0 20px;
+
+	@include tablet {
+		flex-direction: row;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
 
 	&__card{
-		max-width: 350px;
+
+		@include tablet {
+			max-width: 350px;
+		}
 
 		&__container{
-			width: 350px;
-			height: 300px;
+			height: 190px;
 			position: relative;
 			overflow: hidden;
 			border-radius: 5px;
 			margin: 0 auto;
+
+			@include tablet {
+				width: 350px;
+				height: 300px;
+			}
 
 			img, video{
 				width: 100%;
@@ -27,7 +40,11 @@
 			display: flex;
 			justify-content: space-between;
 			color: $brand-primary;
-			font-size: 24px;
+			font-size: 14px;
+
+			@include tablet {
+				font-size: 24px;
+			}
 		}
 	}
 }

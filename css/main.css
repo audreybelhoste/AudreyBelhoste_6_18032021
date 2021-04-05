@@ -337,10 +337,10 @@ template {
 .font-DMsans, html, body {
   font-family: "DM Sans", sans-serif;
 }
-.font-regular, .presentation__name, .content__card__title, .content__title, html, body {
+.font-regular, .presentation__info__name, .content__card__title, .content__title, html, body {
   font-weight: 400;
 }
-.font-medium, .presentation__tag, .header__navigation__item {
+.font-medium, .presentation__info__tag, .header__navigation__item {
   font-weight: 500;
 }
 .font-bold, .skip-links {
@@ -534,46 +534,86 @@ html, body {
   max-width: 1200px;
   margin: 0 auto;
   justify-content: space-between;
-  align-items: center;
-  padding: 50px;
+  align-items: flex-start;
+  padding: 0 20px;
 }
-.presentation__name {
+@media (min-width: 768px) {
+  .presentation {
+    padding: 50px;
+    align-items: center;
+  }
+}
+.presentation__info {
+  max-width: calc(100% - 100px);
+}
+@media (min-width: 768px) {
+  .presentation__info {
+    max-width: calc(100% - 200px);
+  }
+}
+.presentation__info__name {
   color: #D3573C;
-  font-size: 64px;
+  font-size: 36px;
   margin: 0;
 }
-.presentation__location {
+@media (min-width: 768px) {
+  .presentation__info__name {
+    font-size: 64px;
+  }
+}
+.presentation__info__location {
   color: #901C1C;
-  font-size: 24px;
+  font-size: 13px;
   margin: 0;
 }
-.presentation__description {
+@media (min-width: 768px) {
+  .presentation__info__location {
+    font-size: 24px;
+  }
+}
+.presentation__info__description {
   color: #525252;
-  font-size: 18px;
+  font-size: 13px;
   margin: 0;
 }
-.presentation ul {
+@media (min-width: 768px) {
+  .presentation__info__description {
+    font-size: 18px;
+  }
+}
+.presentation__info ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   margin: 8px 0 0;
   padding: 0;
 }
-.presentation__tag {
+.presentation__info__tag {
   border: 0.5px solid #C4C4C4;
   border-radius: 12px;
   padding: 3px 7px;
   margin-right: 5px;
-  font-size: 18px;
+  font-size: 13px;
   color: #901C1C;
   margin-bottom: 6px;
 }
+@media (min-width: 768px) {
+  .presentation__info__tag {
+    font-size: 18px;
+  }
+}
 .presentation__image {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   position: relative;
   overflow: hidden;
   border-radius: 50%;
+}
+@media (min-width: 768px) {
+  .presentation__image {
+    width: 200px;
+    height: 200px;
+  }
 }
 .presentation__image img {
   width: 100%;
@@ -583,21 +623,35 @@ html, body {
 
 .media {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 40px auto 0;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 0 20px;
 }
-.media__card {
-  max-width: 350px;
+@media (min-width: 768px) {
+  .media {
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+@media (min-width: 768px) {
+  .media__card {
+    max-width: 350px;
+  }
 }
 .media__card__container {
-  width: 350px;
-  height: 300px;
+  height: 190px;
   position: relative;
   overflow: hidden;
   border-radius: 5px;
   margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .media__card__container {
+    width: 350px;
+    height: 300px;
+  }
 }
 .media__card__container img, .media__card__container video {
   width: 100%;
@@ -608,7 +662,12 @@ html, body {
   display: flex;
   justify-content: space-between;
   color: #901C1C;
-  font-size: 24px;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .media__card__details {
+    font-size: 24px;
+  }
 }
 
 .lightbox {
@@ -621,13 +680,87 @@ html, body {
   z-index: 10;
 }
 .lightbox__container {
-  margin: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  height: 100%;
 }
-.lightbox__container img {
-  max-height: calc(100vh - 100px);
+.lightbox__container img, .lightbox__container video {
+  max-height: 80vh;
+  max-width: 80vw;
+}
+@media (min-width: 768px) {
+  .lightbox__container img, .lightbox__container video {
+    max-width: 90vw;
+  }
+}
+.lightbox__container figcaption {
+  color: #901C1C;
+  font-size: 14px;
+  margin-top: 7px;
+}
+@media (min-width: 768px) {
+  .lightbox__container figcaption {
+    font-size: 24px;
+    margin-top: 12px;
+  }
+}
+.lightbox__close {
+  position: absolute;
+  top: 100px;
+  right: 15px;
+  width: 12px;
+  height: 12px;
+  background: transparent url("../img/close.svg") center center no-repeat;
+  background-size: cover;
+  text-indent: 3000px;
+  overflow: hidden;
+  border: 0;
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .lightbox__close {
+    width: 42px;
+    height: 42px;
+    right: 100px;
+  }
+}
+.lightbox__next, .lightbox__prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8.16px;
+  height: 13.23px;
+  background: transparent url("../img/arrow.svg") center center no-repeat;
+  background-size: cover;
+  text-indent: 3000px;
+  overflow: hidden;
+  border: 0;
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .lightbox__next, .lightbox__prev {
+    width: 30px;
+    height: 48px;
+  }
+}
+.lightbox__next {
+  right: 15px;
+}
+@media (min-width: 768px) {
+  .lightbox__next {
+    right: 100px;
+  }
+}
+.lightbox__prev {
+  left: 15px;
+  transform: translateY(-50%) rotate(180deg);
+}
+@media (min-width: 768px) {
+  .lightbox__prev {
+    left: 100px;
+  }
 }
 
 .fadeOut {

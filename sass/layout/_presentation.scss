@@ -3,55 +3,91 @@
 	max-width: 1200px;
 	margin: 0 auto;
 	justify-content: space-between;
-	align-items: center;
-	padding: 50px;
+	align-items: flex-start;
+	padding: 0 20px;
 
-	&__name{
-		color: $brand-text-secondary;
-		font-size: 64px;
-		margin: 0;
-
-		@extend .font-regular; 
+	@include tablet {
+		padding: 50px;
+		align-items: center;
 	}
 
-	&__location{
-		color: $brand-primary;
-		font-size: 24px;
-		margin: 0;
+	&__info{
+		max-width: calc(100% - 100px);
+
+		@include tablet {
+			max-width: calc(100% - 200px);
+		}
+
+		&__name{
+			color: $brand-text-secondary;
+			font-size: 36px;
+			margin: 0;
+
+			@extend .font-regular; 
+
+			@include tablet {
+				font-size: 64px;
+			}
+		}
+
+		&__location{
+			color: $brand-primary;
+			font-size: 13px;
+			margin: 0;
+
+			@include tablet {
+				font-size: 24px;
+			}
+		}
+
+		&__description{
+			color: $brand-text2;
+			font-size: 13px;
+			margin: 0;
+
+			@include tablet {
+				font-size: 18px;
+			}
+		}
+
+		ul{
+			list-style: none;
+			display: flex;
+			flex-wrap: wrap;
+			margin: 8px 0 0;
+			padding: 0;
+		}
+
+		&__tag{
+			border: 0.5px solid $brand-grey;
+			border-radius: 12px;
+			padding: 3px 7px; 
+			margin-right: 5px;
+			font-size: 13px;
+			color: $brand-primary;
+			margin-bottom: 6px;
+
+			@extend .font-medium;
+
+			@include tablet {
+				font-size: 18px;
+			}
+		}
 	}
 
-	&__description{
-		color: $brand-text2;
-		font-size: 18px;
-		margin: 0;
-	}
 
-	ul{
-		list-style: none;
-		display: flex;
-		flex-wrap: wrap;
-		margin: 8px 0 0;
-		padding: 0;
-	}
-
-	&__tag{
-		border: 0.5px solid $brand-grey;
-		border-radius: 12px;
-		padding: 3px 7px; 
-		margin-right: 5px;
-		font-size: 18px;
-		color: $brand-primary;
-		margin-bottom: 6px;
-
-		@extend .font-medium;
-	}
 
 	&__image{
-		width: 200px;
-		height: 200px;
+		width: 100px;
+		height: 100px;
 		position: relative;
 		overflow: hidden;
 		border-radius: 50%;
+
+		@include tablet {
+			width: 200px;
+			height: 200px;
+		}
 
 		img{
 			width: 100%;

@@ -25,21 +25,23 @@ function showInformations(data){
 			var tagsList = document.createElement('ul');
 			var imageContainer = document.createElement('div');
 			var image = document.createElement('img');
+
+			blocInfo.classList.add("presentation__info")
 	
 			name.textContent = photographers[i].name;
-			name.classList.add("presentation__name");
+			name.classList.add("presentation__info__name");
 	
 			location.textContent = photographers[i].city + ", " + photographers[i].country;
-			location.classList.add("presentation__location");
+			location.classList.add("presentation__info__location");
 	
 			description.textContent = photographers[i].tagline;
-			description.classList.add("presentation__description"); 
+			description.classList.add("presentation__info__description"); 
 	
 			var tags = photographers[i].tags; 
 			for (var j = 0; j < tags.length; j++){
 				var listItem = document.createElement('li');
 				listItem.textContent = "#" + tags[j];
-				listItem.classList.add("presentation__tag") 
+				listItem.classList.add("presentation__info__tag") 
 				tagsList.appendChild(listItem);
 			}
 
@@ -200,9 +202,13 @@ function showMedia(data){
 	
 		loadImage(currentMedia) {
 			this.currentMedia = null;
-			const container = this.element.querySelector('.lightbox__container')
+			const container = this.element.querySelector('.lightbox__container figure')
 			media = document.createElement(currentMedia.type);
-			title = document.createElement('p');
+
+			if(currentMedia.type === "video"){
+				media.setAttribute('controls', true);
+			}
+			title = document.createElement('figcaption');
 			title.textContent = currentMedia.title;
 			container.innerHTML = '';
 			container.appendChild(media);
@@ -214,7 +220,7 @@ function showMedia(data){
 		buildDOM() {
 			const dom = document.createElement('div');
 			dom.classList.add('lightbox');
-			dom.innerHTML = '<button class="lightbox__close">Fermer</button> <button class="lightbox__next">Suivant</button> <button class="lightbox__prev">Précédent</button> <div class="lightbox__container"></div>'
+			dom.innerHTML = '<button class="lightbox__close">Fermer</button> <button class="lightbox__next">Suivant</button> <button class="lightbox__prev">Précédent</button> <div class="lightbox__container"><figure></figure></figure></div>'
 			dom.querySelector('.lightbox__close').addEventListener('click', this.close.bind(this));
 			dom.querySelector('.lightbox__next').addEventListener('click', this.next.bind(this));
 			dom.querySelector('.lightbox__prev').addEventListener('click', this.prev.bind(this));
