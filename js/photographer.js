@@ -68,7 +68,7 @@ function createAMedia(id, photographerId, link, tags, likes, date, price, alt){
 		link : link,
 		tags : tags, 
 		likes : likes, 
-		date : date, 
+		date : new Date(date), 
 		price : price, 
 		title :  link.replace('.jpg', '').replaceAll('_', ' '),
 		type: 'img', 
@@ -81,7 +81,7 @@ function createAMedia(id, photographerId, link, tags, likes, date, price, alt){
 			link : link,
 			tags : tags, 
 			likes : likes, 
-			date : date, 
+			date : new Date(date), 
 			price : price, 
 			title :  link.replace('.mp4', '').replaceAll('_', ' '),
 			type: 'video',
@@ -90,60 +90,34 @@ function createAMedia(id, photographerId, link, tags, likes, date, price, alt){
 	}
 }
 
-mediaList = [];
-gallery = [];
-
 function showMedia(data){
-	var mediaSection = document.querySelector('#media');
+	gallery = [];
+	const filters = document.querySelectorAll(".filter__list__item");
+	const filterList = document.querySelector(".filter__list");
 
 	var media = data['media'];
 
 	for(var i = 0; i < media.length; i++){
-		newMedia = createAMedia(media[i].id, media[i].photographerId, media[i].image || media[i].video, media[i].tags, media[i].likes, media[i].date, media[i].price, media[i].alt);
-		mediaList.push(newMedia);
-	}
-
-	for(var i = 0; i < mediaList.length; i++){
-
-		if(mediaList[i].photographerId == url.get('id')){
-			var card = document.createElement('div');
-			var mediaContainer = document.createElement('div');
-			var media = document.createElement(mediaList[i].type);
-			var details = document.createElement('div');
-			var title = document.createElement('p');
-			var price = document.createElement('p');
-			var likes = document.createElement('p');
-
-			card.classList.add("media__card");
-
-			mediaContainer.classList.add("media__card__container");
-			
-			media.src = 'Sample Photos/' + mediaList[i].photographerId + "/" + mediaList[i].link;
-			media.classList.add("media__card__media");
-			media.setAttribute("data-id", mediaList[i].id);
-			media.setAttribute("alt", mediaList[i].alt);
-
-			console.log(mediaList[i].alt);
-
-			details.classList.add("media__card__details");
-
-			title.textContent = mediaList[i].title;
-
-			price.textContent = mediaList[i].price + ' €';
-
-			likes.textContent = mediaList[i].likes;
-			
-			mediaSection.appendChild(card);
-			card.appendChild(mediaContainer);
-			mediaContainer.appendChild(media);
-			card.appendChild(details);
-			details.appendChild(title);
-			details.appendChild(price); 
-			details.appendChild(likes);
-
-			gallery.push(mediaList[i]);
+		if(media[i].photographerId == url.get('id')){
+			newMedia = createAMedia(media[i].id, media[i].photographerId, media[i].image || media[i].video, media[i].tags, media[i].likes, media[i].date, media[i].price, media[i].alt);
+			gallery.push(newMedia);
 		}
 	}
+	
+	filters.forEach(function(filter) {
+		filter.addEventListener('click', function(e) {
+			if(filter.classList.contains('selected')) {
+				filterList.classList.add('open');
+			} else {
+				filterList.classList.remove('open');
+			}
+			filters.forEach(filter => filter.classList.remove('selected'));
+			this.classList.add('selected');
+			orderBy(filter.getAttribute('name'));
+		})
+	})
+
+	createDOMGallery(gallery);
 
 	class Lightbox {
 		
@@ -152,9 +126,9 @@ function showMedia(data){
 			links.forEach(function(link) {
 				link.addEventListener('click', function(e) {
 					e.preventDefault();
-					for(var i = 0; i < mediaList.length; i++){
-						if(mediaList[i].id == e.currentTarget.getAttribute('data-id')){
-							var currentMedia = mediaList[i];
+					for(var i = 0; i < gallery.length; i++){
+						if(gallery[i].id == e.currentTarget.getAttribute('data-id')){
+							var currentMedia = gallery[i];
 						}
 					}
 					new Lightbox(currentMedia, gallery);
@@ -234,5 +208,73 @@ function showMedia(data){
 	}
 	
 	Lightbox.init();
+}
+
+function orderBy(filter){
+
+	if(filter === 'popularity') {
+		gallery.sort((a, b) => b.likes - a.likes);
+	}
+
+	if(filter === 'date') {
+		gallery.sort((a, b) => b.date - a.date);
+	}
+
+	if(filter === 'title') {
+		gallery.sort(function(a, b) {
+		return a.title.localeCompare(b.title)
+		})
+	}
+
+	clearDOMGallery();
+	createDOMGallery(gallery);
+}
+
+function createDOMGallery(gallery){
+	var mediaSection = document.querySelector('#media');
+
+	for(var i = 0; i < gallery.length; i++){
+		
+		var card = document.createElement('div');
+		var mediaContainer = document.createElement('div');
+		var media = document.createElement(gallery[i].type);
+		var details = document.createElement('div');
+		var title = document.createElement('p');
+		var price = document.createElement('p');
+		var likes = document.createElement('p');
+
+		card.classList.add("media__card");
+
+		mediaContainer.classList.add("media__card__container");
+		
+		media.src = 'Sample Photos/' + gallery[i].photographerId + "/" + gallery[i].link;
+		media.classList.add("media__card__media");
+		media.setAttribute("data-id", gallery[i].id);
+		media.setAttribute("alt", gallery[i].alt);
+
+		details.classList.add("media__card__details");
+
+		title.textContent = gallery[i].title;
+
+		price.textContent = gallery[i].price + ' €';
+
+		likes.textContent = gallery[i].likes;
+		
+		mediaSection.appendChild(card);
+		card.appendChild(mediaContainer);
+		mediaContainer.appendChild(media);
+		card.appendChild(details);
+		details.appendChild(title);
+		details.appendChild(price); 
+		details.appendChild(likes);
+	}
+}
+
+function clearDOMGallery(){
+	var mediaSection = document.querySelector('#media');
+
+	while(mediaSection.firstChild){
+		mediaSection.removeChild(mediaSection.firstChild);
+	}
 }
 

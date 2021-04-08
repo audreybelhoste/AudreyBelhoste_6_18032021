@@ -1,0 +1,49 @@
+.filter{
+	max-width: 1200px;
+	margin: 20px auto 0;
+	display: flex;
+	max-height: 68px;
+	overflow: visible;
+
+	&__label{
+		margin-right: 25px;
+		font-size: 18px;
+
+		@extend .font-bold;
+	}
+
+	&__list{
+		background-color: $brand-primary2;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 10px;
+		border-radius: 5px;
+		height: 68px;
+		transition: all 0.3s ease;
+
+		&.open {
+			height: 164px;
+			z-index: 10;
+		}
+
+		&__item{
+			background-color: transparent;
+			border: none;
+			color: $brand-light;
+			padding: 14px 46px 14px 10px;
+			order: 2;
+			font-size: 18px;
+			position: relative;
+			display: block;
+			width: 100%;
+			text-align: left;
+
+			@extend .font-bold;
+
+			&.selected{
+				order: 1
+			}
+		}
+	}
+}

@@ -7,14 +7,17 @@
 
 	@include tablet {
 		flex-direction: row;
-		justify-content: space-between;
 		flex-wrap: wrap;
 	}
 
 	&__card{
 
-		@include tablet {
+		max-width: 600px;
+		margin: 0 auto;
+
+		@include desktop {
 			max-width: 350px;
+			margin: 0 calc((100% - 3 * 350px) / 6);
 		}
 
 		&__container{
@@ -24,7 +27,7 @@
 			border-radius: 5px;
 			margin: 0 auto;
 
-			@include tablet {
+			@include desktop {
 				width: 350px;
 				height: 300px;
 			}
