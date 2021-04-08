@@ -60,7 +60,7 @@ function showInformations(data){
 	}
 }
 
-function createAMedia(id, photographerId, link, tags, likes, date, price){
+function createAMedia(id, photographerId, link, tags, likes, date, price, alt){
 	if (link.split('.').pop() == 'jpg') {
 		return {
 		id : id, 
@@ -71,7 +71,8 @@ function createAMedia(id, photographerId, link, tags, likes, date, price){
 		date : date, 
 		price : price, 
 		title :  link.replace('.jpg', '').replaceAll('_', ' '),
-		type: 'img'
+		type: 'img', 
+		alt: alt
 		}
 	} else if (link.split('.').pop() == 'mp4') {
 		return {
@@ -83,7 +84,8 @@ function createAMedia(id, photographerId, link, tags, likes, date, price){
 			date : date, 
 			price : price, 
 			title :  link.replace('.mp4', '').replaceAll('_', ' '),
-			type: 'video'
+			type: 'video',
+			alt: alt
 		}
 	}
 }
@@ -97,7 +99,7 @@ function showMedia(data){
 	var media = data['media'];
 
 	for(var i = 0; i < media.length; i++){
-		newMedia = createAMedia(media[i].id, media[i].photographerId, media[i].image || media[i].video, media[i].tags, media[i].likes, media[i].date, media[i].price);
+		newMedia = createAMedia(media[i].id, media[i].photographerId, media[i].image || media[i].video, media[i].tags, media[i].likes, media[i].date, media[i].price, media[i].alt);
 		mediaList.push(newMedia);
 	}
 
@@ -119,6 +121,9 @@ function showMedia(data){
 			media.src = 'Sample Photos/' + mediaList[i].photographerId + "/" + mediaList[i].link;
 			media.classList.add("media__card__media");
 			media.setAttribute("data-id", mediaList[i].id);
+			media.setAttribute("alt", mediaList[i].alt);
+
+			console.log(mediaList[i].alt);
 
 			details.classList.add("media__card__details");
 
