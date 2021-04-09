@@ -723,6 +723,7 @@ html, body {
   overflow: hidden;
   border: 0;
   cursor: pointer;
+  z-index: 5;
 }
 @media (min-width: 768px) {
   .lightbox__close {
@@ -743,6 +744,7 @@ html, body {
   overflow: hidden;
   border: 0;
   cursor: pointer;
+  z-index: 5;
 }
 @media (min-width: 768px) {
   .lightbox__next, .lightbox__prev {
@@ -782,6 +784,7 @@ html, body {
 .filter__label {
   margin-right: 25px;
   font-size: 18px;
+  padding: 24px 0;
 }
 .filter__list {
   background-color: #911C1C;
@@ -791,11 +794,14 @@ html, body {
   padding: 10px;
   border-radius: 5px;
   height: 68px;
-  transition: all 0.3s ease;
+  overflow: hidden;
 }
 .filter__list.open {
   height: 164px;
   z-index: 10;
+}
+.filter__list.open .selected::after {
+  transform: translateY(-50%) rotate(0);
 }
 .filter__list__item {
   background-color: transparent;
@@ -811,6 +817,18 @@ html, body {
 }
 .filter__list__item.selected {
   order: 1;
+}
+.filter__list__item.selected::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 16px;
+  height: 11px;
+  background: transparent url("../img/arrowWhite.svg") center center no-repeat;
+  background-size: cover;
+  transform: translateY(-50%) rotate(180deg);
+  transition: all 0.3s ease;
 }
 
 /*# sourceMappingURL=main.css.map */

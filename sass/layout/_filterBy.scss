@@ -8,6 +8,7 @@
 	&__label{
 		margin-right: 25px;
 		font-size: 18px;
+		padding: 24px 0;
 
 		@extend .font-bold;
 	}
@@ -20,11 +21,18 @@
 		padding: 10px;
 		border-radius: 5px;
 		height: 68px;
-		transition: all 0.3s ease;
+		overflow: hidden;
 
 		&.open {
 			height: 164px;
 			z-index: 10;
+
+			.selected{
+				
+				&::after{
+					transform: translateY(-50%) rotate(0);
+				}
+			}
 		}
 
 		&__item{
@@ -42,7 +50,20 @@
 			@extend .font-bold;
 
 			&.selected{
-				order: 1
+				order: 1;
+
+				&::after{
+					content: '';
+					position: absolute;
+					top: 50%; 
+					right: 10px;
+					width: 16px;
+					height: 11px;
+					background: transparent url("../img/arrowWhite.svg") center center no-repeat;
+					background-size: cover;
+					transform: translateY(-50%) rotate(180deg);
+					transition: all 0.3s ease;
+				}	
 			}
 		}
 	}

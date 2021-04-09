@@ -107,107 +107,21 @@ function showMedia(data){
 	filters.forEach(function(filter) {
 		filter.addEventListener('click', function(e) {
 			if(filter.classList.contains('selected')) {
-				filterList.classList.add('open');
+				if(filterList.classList.contains('open')){
+					filterList.classList.remove('open');
+				} else {
+					filterList.classList.add('open');
+				}				
 			} else {
 				filterList.classList.remove('open');
+				filters.forEach(filter => filter.classList.remove('selected'));
+				this.classList.add('selected');
+				orderBy(filter.getAttribute('name'));
 			}
-			filters.forEach(filter => filter.classList.remove('selected'));
-			this.classList.add('selected');
-			orderBy(filter.getAttribute('name'));
 		})
 	})
 
 	createDOMGallery(gallery);
-
-	class Lightbox {
-		
-		static init () {
-			const links = Array.from(document.querySelectorAll(".media__card__media"));
-			links.forEach(function(link) {
-				link.addEventListener('click', function(e) {
-					e.preventDefault();
-					for(var i = 0; i < gallery.length; i++){
-						if(gallery[i].id == e.currentTarget.getAttribute('data-id')){
-							var currentMedia = gallery[i];
-						}
-					}
-					new Lightbox(currentMedia, gallery);
-				})
-			})
-		}
-	
-		constructor(url, gallery) {
-			this.element = this.buildDOM(url);
-			this.loadImage(url);
-			this.gallery = gallery;
-			this.onKeyUp = this.onKeyUp.bind(this);
-			document.body.appendChild(this.element);
-			document.addEventListener('keyup', this.onKeyUp);
-		}
-	
-		onKeyUp(e) {
-			if( e.key == 'Escape') {
-				this.close(e);
-			} else if ( e.key == 'ArrowLeft') {
-				this.prev(e);
-			} else if (e.key == 'ArrowRight') {
-				this.next(e);
-			}
-		}
-	
-		close(e) {
-			e.preventDefault();
-			this.element.remove();
-			document.removeEventListener('keyup', this.onKeyUp);
-		}
-	
-		next(e) {
-			e.preventDefault; 
-			let i = this.gallery.findIndex(media => media === this.currentMedia);
-			if (i === this.gallery.length - 1) {
-				i = -1;
-			}
-			this.loadImage(this.gallery[i + 1]);
-		}
-	
-		prev(e) {
-			e.preventDefault();
-			let i = this.gallery.findIndex(media => media === this.currentMedia);
-			if (i == 0) {
-				i = this.gallery.length;
-			}
-			this.loadImage(this.gallery[i - 1]);
-		}
-	
-		loadImage(currentMedia) {
-			this.currentMedia = null;
-			const container = this.element.querySelector('.lightbox__container figure')
-			media = document.createElement(currentMedia.type);
-
-			if(currentMedia.type === "video"){
-				media.setAttribute('controls', true);
-			}
-			title = document.createElement('figcaption');
-			title.textContent = currentMedia.title;
-			container.innerHTML = '';
-			container.appendChild(media);
-			container.appendChild(title);
-			media.src = 'Sample Photos/' + currentMedia.photographerId + "/" + currentMedia.link;
-			this.currentMedia = currentMedia;
-		}
-	
-		buildDOM() {
-			const dom = document.createElement('div');
-			dom.classList.add('lightbox');
-			dom.innerHTML = '<button class="lightbox__close">Fermer</button> <button class="lightbox__next">Suivant</button> <button class="lightbox__prev">Précédent</button> <div class="lightbox__container"><figure></figure></figure></div>'
-			dom.querySelector('.lightbox__close').addEventListener('click', this.close.bind(this));
-			dom.querySelector('.lightbox__next').addEventListener('click', this.next.bind(this));
-			dom.querySelector('.lightbox__prev').addEventListener('click', this.prev.bind(this));
-			return dom;
-		}
-	}
-	
-	Lightbox.init();
 }
 
 function orderBy(filter){
@@ -268,13 +182,100 @@ function createDOMGallery(gallery){
 		details.appendChild(price); 
 		details.appendChild(likes);
 	}
+
+	Lightbox.init();
 }
 
 function clearDOMGallery(){
 	var mediaSection = document.querySelector('#media');
+	mediaSection.innerHTML = '';
+}
 
-	while(mediaSection.firstChild){
-		mediaSection.removeChild(mediaSection.firstChild);
+class Lightbox {
+		
+	static init () {
+		const links = Array.from(document.querySelectorAll(".media__card__media"));
+		links.forEach(function(link) {
+			link.addEventListener('click', function(e) {
+				e.preventDefault();
+				for(var i = 0; i < gallery.length; i++){
+					if(gallery[i].id == e.currentTarget.getAttribute('data-id')){
+						var currentMedia = gallery[i];
+					}
+				}
+				new Lightbox(currentMedia, gallery);
+			})
+		})
+	}
+
+	constructor(url, gallery) {
+		this.element = this.buildDOM(url);
+		this.loadImage(url);
+		this.gallery = gallery;
+		this.onKeyUp = this.onKeyUp.bind(this);
+		document.body.appendChild(this.element);
+		document.addEventListener('keyup', this.onKeyUp);
+	}
+
+	onKeyUp(e) {
+		if( e.key == 'Escape') {
+			this.close(e);
+		} else if ( e.key == 'ArrowLeft') {
+			this.prev(e);
+		} else if (e.key == 'ArrowRight') {
+			this.next(e);
+		}
+	}
+
+	close(e) {
+		e.preventDefault();
+		this.element.remove();
+		document.removeEventListener('keyup', this.onKeyUp);
+	}
+
+	next(e) {
+		e.preventDefault; 
+		let i = this.gallery.findIndex(media => media === this.currentMedia);
+		if (i === this.gallery.length - 1) {
+			i = -1;
+		}
+		this.loadImage(this.gallery[i + 1]);
+	}
+
+	prev(e) {
+		e.preventDefault();
+		let i = this.gallery.findIndex(media => media === this.currentMedia);
+		if (i == 0) {
+			i = this.gallery.length;
+		}
+		this.loadImage(this.gallery[i - 1]);
+	}
+
+	loadImage(currentMedia) {
+		this.currentMedia = null;
+		const container = this.element.querySelector('.lightbox__container figure');
+		const media = document.createElement(currentMedia.type);
+
+		if(currentMedia.type === "video"){
+			media.setAttribute('controls', true);
+		}
+		const title = document.createElement('figcaption');
+		title.textContent = currentMedia.title;
+		container.innerHTML = '';
+		container.appendChild(media);
+		container.appendChild(title);
+		media.src = 'Sample Photos/' + currentMedia.photographerId + "/" + currentMedia.link;
+		this.currentMedia = currentMedia;
+	}
+
+	buildDOM() {
+		const dom = document.createElement('div');
+		dom.classList.add('lightbox');
+		dom.innerHTML = '<button class="lightbox__close">Fermer</button> <button class="lightbox__next">Suivant</button> <button class="lightbox__prev">Précédent</button> <div class="lightbox__container"><figure></figure></figure></div>'
+		dom.querySelector('.lightbox__close').addEventListener('click', this.close.bind(this));
+		dom.querySelector('.lightbox__next').addEventListener('click', this.next.bind(this));
+		dom.querySelector('.lightbox__prev').addEventListener('click', this.prev.bind(this));
+		return dom;
 	}
 }
 
