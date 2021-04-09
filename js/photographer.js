@@ -169,10 +169,14 @@ function createDOMGallery(gallery){
 		details.classList.add("media__card__details");
 
 		title.textContent = gallery[i].title;
+		title.classList.add("media__card__details__title");
 
-		price.textContent = gallery[i].price + ' €';
+		price.textContent = gallery[i].price + '€';
+		price.classList.add("media__card__details__price");
 
 		likes.textContent = gallery[i].likes;
+		likes.classList.add("media__card__details__likes");
+		likes.setAttribute("data-id", gallery[i].id);
 		
 		mediaSection.appendChild(card);
 		card.appendChild(mediaContainer);
@@ -184,6 +188,7 @@ function createDOMGallery(gallery){
 	}
 
 	Lightbox.init();
+	toggleLike(gallery);
 }
 
 function clearDOMGallery(){
@@ -279,3 +284,25 @@ class Lightbox {
 	}
 }
 
+function toggleLike(gallery) {
+
+	const likes = document.querySelectorAll(".media__card__details__likes");
+
+	likes.forEach(function(like) {
+		like.addEventListener('click', function(e) {
+		
+			for(var i = 0; i < gallery.length; i++){
+				if(gallery[i].id == like.getAttribute('data-id')){
+					if(like.classList.contains('fill')){
+						gallery[i].likes--;
+						like.classList.remove('fill');
+					} else {
+						gallery[i].likes++;
+						like.classList.add('fill');
+					}
+					like.innerHTML = gallery[i].likes;
+				}
+			}
+		})
+	})
+}

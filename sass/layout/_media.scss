@@ -44,9 +44,50 @@
 			justify-content: space-between;
 			color: $brand-primary;
 			font-size: 14px;
+			margin: 10px 0 30px 0;
 
 			@include tablet {
 				font-size: 24px;
+			}
+
+			&__title{
+				margin: 0;
+				flex-grow: 1;
+			}
+
+			&__price{
+				margin: 0 15px;
+				white-space: nowrap;
+			}
+
+			&__likes{
+				position: relative;
+				margin: 0;
+				padding-right: 21px;
+				height: fit-content;
+				text-align: right;
+				cursor: pointer;
+				white-space: nowrap;
+
+				&::after{
+					content: '';
+					position: absolute;
+					top: 50%;
+					transform: translateY(-50%); 
+					right: 0;
+					width: 19px;
+					height: 19px;
+					background: transparent url("../img/heart.svg") center center no-repeat;
+					background-size: contain;
+				}
+				
+				&.fill{
+
+					&::after{
+						background: transparent url("../img/heart-fill.svg") center center no-repeat;
+						background-size: contain;
+					}
+				}
 			}
 		}
 	}

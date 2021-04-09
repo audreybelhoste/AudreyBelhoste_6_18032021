@@ -1,9 +1,13 @@
 .filter{
+	display: none;
 	max-width: 1200px;
 	margin: 20px auto 0;
-	display: flex;
 	max-height: 68px;
 	overflow: visible;
+
+	@include desktop {
+		display: flex;
+	}
 
 	&__label{
 		margin-right: 25px;
