@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FishEye</title>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>FishEye</title>
 
-    <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
-	<header class="header">
-		<a aria-label="Fisheye Home Page" href="index.html" class="header__logo">
-			<img alt="Logo Fisheye" src="logo.svg">
-		</a>
-	</header>
-	<main>
-		<section id="presentation" class="presentation">
-		</section>
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+	<body>
+		<header class="header">
+			<a aria-label="Fisheye Home Page" href="index.html" class="header__logo">
+				<img alt="Logo Fisheye" src="logo.svg">
+			</a>
+		</header>
+		<main>
+			<section id="presentation" class="presentation">
+			</section>
 
-		<section class="filter">
-			<span class="filter__label">Trier par</span>
-			<div class="filter__list">
-				<button class="filter__list__item selected" name="popularity">Popularité</button>
-				<button class="filter__list__item" name="date">Date</button>
-				<button class="filter__list__item" name="title">Titre</button>
-			</div>
-		</section>
+			<section id="info" class="info">
+				<p class="info__likes"></p>
+				<p class="info__price"></p>
+			</section>
 
-		<section id="media" class="media">
-		</section>
+			<section class="filter">
+				<span class="filter__label">Trier par</span>
+				<div class="filter__list">
+					<button class="filter__list__item selected" name="popularity">Popularité</button>
+					<button class="filter__list__item" name="date">Date</button>
+					<button class="filter__list__item" name="title">Titre</button>
+				</div>
+			</section>
+
+			<section id="media" class="media">
+			</section>
+			
+		</main>
 		
-	</main>
-	
-	<script src="./js/photographer.js"></script>
-</body>
+		<script src="./js/lightbox.js"></script>
+		<script src="./js/photographer.js"></script>
+	</body>
 </html>

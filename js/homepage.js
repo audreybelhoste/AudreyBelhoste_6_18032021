@@ -85,26 +85,40 @@ function showPhotographers(data){
 }
 
 var filters = document.querySelectorAll(".header__navigation__item");
+let tags = [];
+
 filters.forEach(function(item) {
 	item.addEventListener('click', function() {
-		var filter = item.getAttribute('data-filter');
-		var tag = item.getAttribute('data-filter-tag');
+		console.log(item);
+		if(item.classList.contains('selected')){
+			tags.splice(tags.indexOf(item.getAttribute('data-filter-tag')));
+			item.classList.remove('selected');
+		} else {
+			item.classList.add('selected');
+			tags.push(item.getAttribute('data-filter-tag'));
+		}
 
-		filterTag(tag);
+		filterTag(tags);
 	})
 })
 
-function filterTag(tag) {
+function filterTag(tags) {
 	var items = document.querySelectorAll('.content__card');
 
 	for (var i = 0; i < items.length; i++){
 		var itemTags = items[i].getAttribute('data-tags');
-		items[i].setAttribute('data-toggle', 'on');
+		items[i].setAttribute('data-toggle', 'off');
 
 		if (itemTags != null) {
-			if (itemTags.indexOf(tag) < 0) {
-			  items[i].setAttribute('data-toggle', 'off');
-			}
-		  }
+			tags.forEach(function(tag) {
+				if (itemTags.includes(tag)) {
+					items[i].setAttribute('data-toggle', 'on');
+				  }
+			})
+		}
+
+		if(!tags.length){
+			items[i].setAttribute('data-toggle', 'on');
+		}
 	}
 }
