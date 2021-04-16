@@ -89,7 +89,6 @@ let tags = [];
 
 filters.forEach(function(item) {
 	item.addEventListener('click', function() {
-		console.log(item);
 		if(item.classList.contains('selected')){
 			tags.splice(tags.indexOf(item.getAttribute('data-filter-tag')));
 			item.classList.remove('selected');

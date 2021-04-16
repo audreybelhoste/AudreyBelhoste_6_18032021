@@ -26,11 +26,14 @@ function showInformations(data){
 			var tagsList = document.createElement('ul');
 			var imageContainer = document.createElement('div');
 			var image = document.createElement('img');
+			const contactBtn = document.querySelector("#btnContact");
 
 			photographerPrice.textContent = photographers[i].price + "€ / jour";
 	
 			name.textContent = photographers[i].name;
 			name.classList.add("presentation__info__name");
+
+			contactBtn.setAttribute("data-name", photographers[i].name);
 	
 			location.textContent = photographers[i].city + ", " + photographers[i].country;
 			location.classList.add("presentation__info__location");
