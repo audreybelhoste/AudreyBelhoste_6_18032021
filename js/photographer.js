@@ -19,7 +19,7 @@ function showInformations(data){
 	for(var i = 0; i < photographers.length; i++){
 
 		if(photographers[i].id == url.get('id')){
-			var blocInfo = document.createElement('div');
+			var blocInfo = document.querySelector('.presentation__info');
 			var name = document.createElement('h1');
 			var location = document.createElement('p');
 			var description = document.createElement('p');
@@ -28,8 +28,6 @@ function showInformations(data){
 			var image = document.createElement('img');
 
 			photographerPrice.textContent = photographers[i].price + "€ / jour";
-
-			blocInfo.classList.add("presentation__info")
 	
 			name.textContent = photographers[i].name;
 			name.classList.add("presentation__info__name");

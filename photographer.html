@@ -15,6 +15,9 @@
 		</header>
 		<main>
 			<section id="presentation" class="presentation">
+				<div class="presentation__info">
+					<button class="presentation__info__contact btn">Contactez-moi</button>
+				</div>
 			</section>
 
 			<section id="info" class="info">
@@ -33,10 +36,37 @@
 
 			<section id="media" class="media">
 			</section>
+
+			<section id="contact" class="contact">
+				<div class="contact__content">
+					<button class="contact__content__close">Fermer</button>
+					<h1 class="contact__content__title">Contactez-moi</h1>
+					<form id="form">
+						<div>
+							<label for="firstname">Prénom</label>
+							<input name="firstname" id="firstname">
+						</div>
+						<div>
+							<label for="lastname">Nom</label>
+							<input name="lastname" id="lastname">
+						</div>
+						<div>
+							<label for="email">Email</label>
+							<input name="email" id="email">
+						</div>
+						<div>
+							<label for="message">Votre message</label>
+							<textarea class="contact__content__email"name="message" id="message"></textarea>
+						</div>
+						<button class="contact__content__send btn">Envoyer</button>
+					</form>
+				</div>
+			</section>
 			
 		</main>
 		
 		<script src="./js/lightbox.js"></script>
 		<script src="./js/photographer.js"></script>
+		<script src="./js/contact.js"></script>
 	</body>
 </html>

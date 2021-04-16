@@ -1,0 +1,84 @@
+.contact{
+	position: fixed; 
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	z-index: 20;
+	display: none;
+
+	&__content{
+		max-width: 650px;
+		position: relative;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 35px;
+		background-color: $brand-secondary;
+
+		&__title{
+			font-size: 36px;
+			margin: 0 0 20px;
+			@extend .font-regular;
+
+			@include tablet{
+				font-size: 64px;
+			}
+		}
+
+		input, textarea{
+			display: block;
+			width: 100%;
+			border: none; 
+			padding: 10px;
+			border-radius: 5px;
+			font-size: 26px;
+
+			@include tablet{
+				font-size: 30px;
+			}
+		}
+
+		label{
+			font-size: 24px;
+
+			@include tablet{
+				font-size: 36px;
+			}
+		}
+
+		&__email{
+			min-height: 170px;
+			max-width: 100%;
+		}
+
+		&__send{
+			margin-top: 26px;
+			padding: 23px 50px;
+			font-size: 18px;
+		}
+
+		&__close{
+			position: absolute;
+			top: 26px; 
+			right: 26px;
+			width: 18px;
+			height: 18px;
+			background: transparent url("../img/closeWhite.svg") center center no-repeat;
+			background-size: cover;
+			text-indent: 3000px;
+			overflow: hidden;
+			border: 0;
+			cursor: pointer;
+			z-index: 5;
+	
+			@include tablet {
+				width: 42px;
+				height: 42px;
+				top: 35px; 
+				right: 35px;
+			}
+		}
+	}
+}

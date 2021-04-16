@@ -16,7 +16,8 @@
 		max-width: calc(100% - 100px);
 
 		@include tablet {
-			max-width: calc(100% - 200px);
+			max-width: calc(100% - 400px);
+			position: relative;
 		}
 
 		&__name{
@@ -74,9 +75,24 @@
 				font-size: 18px;
 			}
 		}
+
+		&__contact{
+			position: fixed;
+			bottom: 30px;
+			left: 50%;
+			transform: translateX(-50%);
+			@extend .font-bold;
+	
+			@include tablet {
+				position: absolute;
+				top: 0;
+				right: -200px;
+				bottom: auto;
+				left: auto;
+				transform: translateX(0);
+			}
+		}
 	}
-
-
 
 	&__image{
 		width: 100px;

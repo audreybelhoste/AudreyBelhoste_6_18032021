@@ -1,0 +1,16 @@
+.btn{
+	z-index: 10;
+	padding: 5px 19px;
+	background-color: $brand-primary2;
+	color: $brand-light;
+	font-size: 18px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	@extend .font-bold;
+
+	@include tablet {
+		padding: 22px 11px;
+		font-size: 20px;
+	}
+}
