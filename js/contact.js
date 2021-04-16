@@ -9,6 +9,7 @@ const email = document.getElementById("email");
 const meassage = document.getElementById("message");
 
 contactBtn.addEventListener("click", function (event) {
+	document.body.classList.add('modalOpen');
 	contactName.textContent = "Contactez-moi " + contactBtn.getAttribute('data-name');
 	contactBg.style.display = "block";
 });
@@ -16,6 +17,7 @@ contactBtn.addEventListener("click", function (event) {
 contactCloseBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 
 function closeModal() {
+	document.body.classList.remove('modalOpen');
 	contactBg.style.display = "none";
 }
 

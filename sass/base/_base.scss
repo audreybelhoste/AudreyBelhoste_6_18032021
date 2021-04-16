@@ -3,3 +3,8 @@
 *:after {
   box-sizing: border-box;
 }
+
+body.modalOpen{
+	overflow-y: hidden;
+	max-height: 100vh;
+}
