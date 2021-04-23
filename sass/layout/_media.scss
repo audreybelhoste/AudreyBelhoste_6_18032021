@@ -21,6 +21,7 @@
 		}
 
 		&__container{
+			display: block;
 			height: 190px;
 			position: relative;
 			overflow: hidden;
@@ -69,6 +70,10 @@
 				text-align: right;
 				cursor: pointer;
 				white-space: nowrap;
+				border: none;
+				background-color: transparent;
+				line-height: 1.5;
+				color: $brand-primary;
 
 				&::after{
 					content: '';

@@ -94,8 +94,9 @@ function createAMedia(id, photographerId, link, tags, likes, date, price, alt){
 	}
 }
 
+var gallery = [];
+
 function showMedia(data){
-	gallery = [];
 	const filters = document.querySelectorAll(".filter__list__item");
 	const filterList = document.querySelector(".filter__list");
 
@@ -103,7 +104,7 @@ function showMedia(data){
 
 	for(var i = 0; i < media.length; i++){
 		if(media[i].photographerId == url.get('id')){
-			newMedia = createAMedia(media[i].id, media[i].photographerId, media[i].image || media[i].video, media[i].tags, media[i].likes, media[i].date, media[i].price, media[i].alt);
+			var newMedia = createAMedia(media[i].id, media[i].photographerId, media[i].image || media[i].video, media[i].tags, media[i].likes, media[i].date, media[i].price, media[i].alt);
 			gallery.push(newMedia);
 		}
 	}
@@ -163,23 +164,22 @@ function createDOMGallery(gallery){
 	for(var i = 0; i < gallery.length; i++){
 		
 		var card = document.createElement('div');
-		var mediaLink = document.createElement('a');
-		var mediaContainer = document.createElement('div');
+		var mediaContainer = document.createElement('a');
 		var media = document.createElement(gallery[i].type);
 		var details = document.createElement('div');
 		var title = document.createElement('p');
 		var price = document.createElement('p');
-		var likes = document.createElement('p');
+		var likes = document.createElement('button');
 
 		card.classList.add("media__card");
 
-		mediaLink.setAttribute('href', '#');
+		mediaContainer.setAttribute('href', '#');
 
 		mediaContainer.classList.add("media__card__container");
 		
 		media.src = 'Sample Photos/' + gallery[i].photographerId + "/" + gallery[i].link;
 		media.classList.add("media__card__media");
-		media.setAttribute("data-id", gallery[i].id);
+		mediaContainer.setAttribute("data-id", gallery[i].id);
 		media.setAttribute("alt", gallery[i].alt);
 
 		details.classList.add("media__card__details");
@@ -193,12 +193,10 @@ function createDOMGallery(gallery){
 		likes.textContent = gallery[i].likes;
 		likes.classList.add("media__card__details__likes");
 		likes.setAttribute("data-id", gallery[i].id);
-		likes.setAttribute('role', 'button');
-		likes.setAttribute('tabindex', '0');
+		likes.setAttribute('aria-label', 'likes');
 		
 		mediaSection.appendChild(card);
-		card.appendChild(mediaLink);
-		mediaLink.appendChild(mediaContainer);
+		card.appendChild(mediaContainer);
 		mediaContainer.appendChild(media);
 		card.appendChild(details);
 		details.appendChild(title);

@@ -708,6 +708,7 @@ html, body {
   }
 }
 .media__card__container {
+  display: block;
   height: 190px;
   position: relative;
   overflow: hidden;
@@ -754,6 +755,10 @@ html, body {
   text-align: right;
   cursor: pointer;
   white-space: nowrap;
+  border: none;
+  background-color: transparent;
+  line-height: 1.5;
+  color: #901C1C;
 }
 .media__card__details__likes::after {
   content: "";

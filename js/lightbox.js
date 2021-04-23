@@ -1,10 +1,10 @@
 class Lightbox {
 		
 	static init () {
-		const links = Array.from(document.querySelectorAll(".media__card__media"));
+		const links = Array.from(document.querySelectorAll(".media__card__container"));
 		links.forEach(function(link) {
 			link.addEventListener('click', function(e) {
-				e.preventDefault();
+						e.preventDefault();
 				for(var i = 0; i < gallery.length; i++){
 					if(gallery[i].id == e.currentTarget.getAttribute('data-id')){
 						var currentMedia = gallery[i];
@@ -21,6 +21,7 @@ class Lightbox {
 		this.gallery = gallery;
 		this.onKeyUp = this.onKeyUp.bind(this);
 		document.body.appendChild(this.element);
+		document.querySelector('#lightboxClose').focus();
 		document.addEventListener('keyup', this.onKeyUp);
 	}
 
@@ -79,10 +80,10 @@ class Lightbox {
 
 	buildDOM() {
 		document.body.classList.add('modalOpen');
-		document.querySelector("#main-wrapper").setAttribute('aria-hidden', 'true');
+		document.querySelector('#main-wrapper').setAttribute('aria-hidden', 'true');
 		const dom = document.createElement('div');
 		dom.classList.add('lightbox');
-		dom.innerHTML = '<button class="lightbox__close">Fermer</button> <button class="lightbox__next">Suivant</button> <button class="lightbox__prev">Précédent</button> <div class="lightbox__container"><figure></figure></figure></div>'
+		dom.innerHTML = '<button class="lightbox__close" id="lightboxClose">Fermer</button> <button class="lightbox__next">Suivant</button> <button class="lightbox__prev">Précédent</button> <div class="lightbox__container"><figure></figure></figure></div>'
 		dom.querySelector('.lightbox__close').addEventListener('click', this.close.bind(this));
 		dom.querySelector('.lightbox__next').addEventListener('click', this.next.bind(this));
 		dom.querySelector('.lightbox__prev').addEventListener('click', this.prev.bind(this));

@@ -1,0 +1,24 @@
+{
+  "name": "AudreyBelhoste_6_18032021",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/audreybelhoste/AudreyBelhoste_6_18032021.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/audreybelhoste/AudreyBelhoste_6_18032021/issues"
+  },
+  "homepage": "https://github.com/audreybelhoste/AudreyBelhoste_6_18032021#readme",
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "prettier": "^2.2.1"
+  }
+}

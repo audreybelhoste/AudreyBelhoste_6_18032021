@@ -6,7 +6,7 @@ const form = document.getElementById("form");
 const firstname = document.getElementById("firstname");
 const lastname = document.getElementById("lastname");
 const email = document.getElementById("email");
-const meassage = document.getElementById("message");
+const message = document.getElementById("message");
 const mainWrapper = document.querySelector("#main-wrapper");
 
 contactBtn.addEventListener("click", function () {
@@ -29,7 +29,7 @@ function closeModal() {
 
 window.addEventListener('keydown', function (event) {
 	if (event.key === 'Escape') {
-	  closeModal();
+		closeModal();
 	}
 })
 

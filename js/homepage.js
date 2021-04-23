@@ -111,7 +111,7 @@ function filterTag(tags) {
 			tags.forEach(function(tag) {
 				if (itemTags.includes(tag)) {
 					items[i].setAttribute('data-toggle', 'on');
-				  }
+				}
 			})
 		}
 
