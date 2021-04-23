@@ -14,7 +14,7 @@ contactBtn.addEventListener("click", function () {
 	contactName.textContent = "Contactez-moi " + contactBtn.getAttribute('data-name');
 	contactBg.style.display = "block";
 	mainWrapper.setAttribute('aria-hidden', 'true');
-	contactBg.setAttribute('arria-hidden', 'false');
+	contactBg.setAttribute('aria-hidden', 'false');
 	contactCloseBtn.focus();
 });
 

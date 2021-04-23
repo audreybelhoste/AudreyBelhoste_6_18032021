@@ -5,11 +5,11 @@
 	justify-content: space-between;
 	align-items: flex-start;
 	padding: 0 20px;
-	background-color: $brand-grey2;
-
+	
 	@include tablet {
 		padding: 50px;
 		align-items: center;
+		background-color: $brand-grey2;
 	}
 
 	&__info{
@@ -85,7 +85,7 @@
 	
 			@include tablet {
 				position: absolute;
-				top: 0;
+				top: 10px;
 				right: -200px;
 				bottom: auto;
 				left: auto;
