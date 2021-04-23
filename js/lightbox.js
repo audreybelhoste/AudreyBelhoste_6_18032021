@@ -37,6 +37,7 @@ class Lightbox {
 	close(e) {
 		e.preventDefault();
 		document.body.classList.remove('modalOpen');
+		document.querySelector("#main-wrapper").setAttribute('aria-hidden', 'false');
 		this.element.remove();
 		document.removeEventListener('keyup', this.onKeyUp);
 	}
@@ -78,6 +79,7 @@ class Lightbox {
 
 	buildDOM() {
 		document.body.classList.add('modalOpen');
+		document.querySelector("#main-wrapper").setAttribute('aria-hidden', 'true');
 		const dom = document.createElement('div');
 		dom.classList.add('lightbox');
 		dom.innerHTML = '<button class="lightbox__close">Fermer</button> <button class="lightbox__next">Suivant</button> <button class="lightbox__prev">Précédent</button> <div class="lightbox__container"><figure></figure></figure></div>'

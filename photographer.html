@@ -13,7 +13,7 @@
 				<img alt="Logo Fisheye" src="logo.svg">
 			</a>
 		</header>
-		<main>
+		<main id="main-wrapper" aria-hidden="false">
 			<section id="presentation" class="presentation">
 				<div class="presentation__info">
 					<button class="presentation__info__contact btn" id="btnContact">Contactez-moi</button>
@@ -26,44 +26,42 @@
 			</section>
 
 			<section class="filter">
-				<span class="filter__label">Trier par</span>
-				<div class="filter__list">
-					<button class="filter__list__item selected" name="popularity">Popularité</button>
-					<button class="filter__list__item" name="date">Date</button>
-					<button class="filter__list__item" name="title">Titre</button>
+				<span class="filter__label" id="orderBy">Trier par</span>
+				<div class="filter__list" role="button" aria-haspopup="listbox" aria-expanded="true">
+					<button class="filter__list__item selected" name="popularity" tabindex="0" role="listbox" aria-activedescendant="true" aria-selected="true" aria-labelledby="orderBy">Popularité</button>
+					<button class="filter__list__item" name="date" tabindex="-1" role="listbox" aria-activedescendant="true" aria-selected="false" aria-labelledby="orderBy">Date</button>
+					<button class="filter__list__item" name="title" tabindex="-1" role="listbox" aria-activedescendant="true" aria-selected="false" aria-labelledby="orderBy">Titre</button>
 				</div>
 			</section>
 
 			<section id="media" class="media">
-			</section>
-
-			<section id="contact" class="contact">
-				<div class="contact__content">
-					<button class="contact__content__close">Fermer</button>
-					<h1 class="contact__content__title" id="contactName"></h1>
-					<form id="form">
-						<div>
-							<label for="firstname">Prénom</label>
-							<input name="firstname" id="firstname">
-						</div>
-						<div>
-							<label for="lastname">Nom</label>
-							<input name="lastname" id="lastname">
-						</div>
-						<div>
-							<label for="email">Email</label>
-							<input name="email" id="email">
-						</div>
-						<div>
-							<label for="message">Votre message</label>
-							<textarea class="contact__content__email"name="message" id="message"></textarea>
-						</div>
-						<button class="contact__content__send btn">Envoyer</button>
-					</form>
-				</div>
-			</section>
-			
+			</section>		
 		</main>
+		<section id="contact" class="contact" aria-hidden="true" role="dialog">
+			<div class="contact__content">
+				<button class="contact__content__close" id="contactClose" aria-label="Fermer le formulaire de contact">Fermer</button>
+				<h1 class="contact__content__title" id="contactName"></h1>
+				<form id="form">
+					<div>
+						<label for="firstname">Prénom</label>
+						<input name="firstname" id="firstname" type="text" aria-labelledby="firstname">
+					</div>
+					<div>
+						<label for="lastname">Nom</label>
+						<input name="lastname" id="lastname" type="text" aria-labelledby="lastname">
+					</div>
+					<div>
+						<label for="email">Email</label>
+						<input name="email" id="email" type="email" aria-labelledby="email">
+					</div>
+					<div>
+						<label for="message">Votre message</label>
+						<textarea class="contact__content__email" name="message" id="message"></textarea>
+					</div>
+					<button class="contact__content__send btn">Envoyer</button>
+				</form>
+			</div>
+		</section>	
 		
 		<script src="./js/lightbox.js"></script>
 		<script src="./js/photographer.js"></script>

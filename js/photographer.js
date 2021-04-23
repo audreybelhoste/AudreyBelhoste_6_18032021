@@ -51,7 +51,7 @@ function showInformations(data){
 
 			imageContainer.classList.add("presentation__image");
 
-			image.src = 'Sample Photos/Photographers ID Photos/' + photographers[i].portrait;
+			image.src = 'Sample Photo			s/Photographers ID Photos/' + photographers[i].portrait;
 	
 			presentation.appendChild(blocInfo);
 			blocInfo.appendChild(name);
@@ -115,11 +115,18 @@ function showMedia(data){
 					filterList.classList.remove('open');
 				} else {
 					filterList.classList.add('open');
+					filters.forEach(filter => filter.setAttribute('tabindex', '0'));
 				}				
 			} else {
 				filterList.classList.remove('open');
-				filters.forEach(filter => filter.classList.remove('selected'));
+				filters.forEach(function(filter){
+					filter.classList.remove('selected');
+					filter.setAttribute('aria-selected', 'false');
+					filter.setAttribute('tabindex', '-1');
+				});
 				this.classList.add('selected');
+				this.setAttribute('aria-selected', 'true');
+				this.setAttribute('tabindex', '0');
 				orderBy(filter.getAttribute('name'));
 			}
 		})
@@ -156,6 +163,7 @@ function createDOMGallery(gallery){
 	for(var i = 0; i < gallery.length; i++){
 		
 		var card = document.createElement('div');
+		var mediaLink = document.createElement('a');
 		var mediaContainer = document.createElement('div');
 		var media = document.createElement(gallery[i].type);
 		var details = document.createElement('div');
@@ -164,6 +172,8 @@ function createDOMGallery(gallery){
 		var likes = document.createElement('p');
 
 		card.classList.add("media__card");
+
+		mediaLink.setAttribute('href', '#');
 
 		mediaContainer.classList.add("media__card__container");
 		
@@ -183,9 +193,12 @@ function createDOMGallery(gallery){
 		likes.textContent = gallery[i].likes;
 		likes.classList.add("media__card__details__likes");
 		likes.setAttribute("data-id", gallery[i].id);
+		likes.setAttribute('role', 'button');
+		likes.setAttribute('tabindex', '0');
 		
 		mediaSection.appendChild(card);
-		card.appendChild(mediaContainer);
+		card.appendChild(mediaLink);
+		mediaLink.appendChild(mediaContainer);
 		mediaContainer.appendChild(media);
 		card.appendChild(details);
 		details.appendChild(title);

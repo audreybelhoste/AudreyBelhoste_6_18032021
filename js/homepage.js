@@ -24,8 +24,6 @@ function createAPhotographer(name, id, city, country, tags, tagline, price, port
 function showPhotographers(data){
 	var main = document.querySelector('main');
 
-	// var photographers = data['photographers'];
-
 	var photographers = [];
 
 	data['photographers'].forEach(element => {
@@ -51,6 +49,7 @@ function showPhotographers(data){
 		image.src = 'Sample Photos/Photographers ID Photos/' + photographers[i].portrait;
 
 		link.setAttribute('href', 'photographer.html?id=' + photographers[i].id);
+		link.setAttribute('alt', ' ');
 
 		cardTitle.textContent = photographers[i].name;
 		cardTitle.classList.add("content__card__title");
