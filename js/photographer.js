@@ -163,10 +163,10 @@ function createDOMGallery(gallery){
 
 	for(var i = 0; i < gallery.length; i++){
 		
-		var card = document.createElement('div');
+		var card = document.createElement('figure');
 		var mediaContainer = document.createElement('a');
 		var media = document.createElement(gallery[i].type);
-		var details = document.createElement('div');
+		var details = document.createElement('figcaption');
 		var title = document.createElement('p');
 		var price = document.createElement('p');
 		var likes = document.createElement('button');
