@@ -74,6 +74,20 @@
 			@include tablet {
 				font-size: 18px;
 			}
+
+			a{
+				color: $brand-primary;
+				text-decoration: none;
+			}
+
+			&.selected, &:hover, &:focus{
+				background-color: $brand-primary2;
+				border: 0.5px solid $brand-primary2;
+
+				a{
+					color: $brand-light;
+				}
+			}
 		}
 
 		&__contact{

@@ -25,22 +25,18 @@ contactBtn.addEventListener("click", function () {
 	mainWrapper.setAttribute('aria-hidden', 'true');
 	contactBg.setAttribute('aria-hidden', 'false');
 	firstFocusableElement.focus();
-		
+	
 	focusableElements.forEach((focusableElement) => {
 		if (focusableElement.addEventListener) {
 			focusableElement.addEventListener('keydown', (event) => {
-  
-				if (!event.keyCode == 9) {
-					return;
-				}
-	
+						
 				if (event.shiftKey) {
-					if (event.target === firstFocusableElement) { // shift + tab
+					if (event.target === firstFocusableElement && event.keyCode == 9) { // shift + tab
 						event.preventDefault();
 	
 						lastFocusableElement.focus();
 					}
-				} else if (event.target === lastFocusableElement) { // tab
+				} else if (event.target === lastFocusableElement && event.keyCode == 9) { // tab
 					event.preventDefault();
 	
 					firstFocusableElement.focus();

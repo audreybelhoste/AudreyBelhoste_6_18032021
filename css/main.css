@@ -567,6 +567,17 @@ html, body {
   color: #901C1C;
   margin-bottom: 6px;
 }
+.content__card__tag a {
+  color: #901C1C;
+  text-decoration: none;
+}
+.content__card__tag.selected, .content__card__tag:hover, .content__card__tag:focus {
+  background-color: #911C1C;
+  border: 0.5px solid #911C1C;
+}
+.content__card__tag.selected a, .content__card__tag:hover a, .content__card__tag:focus a {
+  color: #ffffff;
+}
 .content [data-toggle=on] {
   display: block;
 }
@@ -648,6 +659,17 @@ html, body {
   .presentation__info__tag {
     font-size: 18px;
   }
+}
+.presentation__info__tag a {
+  color: #901C1C;
+  text-decoration: none;
+}
+.presentation__info__tag.selected, .presentation__info__tag:hover, .presentation__info__tag:focus {
+  background-color: #911C1C;
+  border: 0.5px solid #911C1C;
+}
+.presentation__info__tag.selected a, .presentation__info__tag:hover a, .presentation__info__tag:focus a {
+  color: #ffffff;
 }
 .presentation__info__contact {
   position: fixed;

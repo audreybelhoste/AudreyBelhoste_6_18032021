@@ -43,15 +43,26 @@ function showInformations(data){
 	
 			var tags = photographers[i].tags; 
 			for (var j = 0; j < tags.length; j++){
-				var listItem = document.createElement('li');
+				var listItemContainer = document.createElement('li');
+				var listItemLink = document.createElement('a');
+				var listItem = document.createElement('span');
+				var listItemSr = document.createElement('span');
+				
 				listItem.textContent = "#" + tags[j];
-				listItem.classList.add("presentation__info__tag") 
-				tagsList.appendChild(listItem);
+				listItem.setAttribute('aria-hidden', 'true');
+				listItemSr.textContent = "Tag " + tags[j];
+				listItemSr.classList.add('sr-only');
+				listItemContainer.classList.add("presentation__info__tag");
+				listItemLink.href = 'index.html?tag=' + tags[j];
+				tagsList.appendChild(listItemContainer);
+				listItemContainer.appendChild(listItemLink);
+				listItemLink.appendChild(listItem);
+				listItemLink.appendChild(listItemSr);
 			}
 
 			imageContainer.classList.add("presentation__image");
 
-			image.src = 'Sample Photo			s/Photographers ID Photos/' + photographers[i].portrait;
+			image.src = 'Sample Photos/Photographers ID Photos/' + photographers[i].portrait;
 	
 			presentation.appendChild(blocInfo);
 			blocInfo.appendChild(name);
@@ -267,7 +278,30 @@ class Lightbox {
 		this.gallery = gallery;
 		this.onKeyUp = this.onKeyUp.bind(this);
 		document.body.appendChild(this.element);
-		document.querySelector('#lightboxClose').focus();
+
+		const lightboxBg = document.querySelector('#lightbox');
+		const focusableElements = lightboxBg.querySelectorAll('button:not([disabled])');
+		const firstFocusableElement = focusableElements[0];
+		const lastFocusableElement = focusableElements[focusableElements.length - 1];
+		firstFocusableElement.focus();
+		focusableElements.forEach((focusableElement) => {
+			if (focusableElement.addEventListener) {
+				focusableElement.addEventListener('keydown', (event) => {
+		
+					if (event.shiftKey && event.keyCode === 9) {
+						if (event.target === firstFocusableElement) { // shift + tab
+							event.preventDefault();
+		
+							lastFocusableElement.focus();
+						}
+					} else if (event.target === lastFocusableElement && event.keyCode === 9) { // tab
+						event.preventDefault();
+		
+						firstFocusableElement.focus();
+					}
+				});
+			}
+		});
 		document.addEventListener('keyup', this.onKeyUp);
 	}
 
@@ -329,6 +363,7 @@ class Lightbox {
 		document.querySelector('#main-wrapper').setAttribute('aria-hidden', 'true');
 		const dom = document.createElement('div');
 		dom.classList.add('lightbox');
+		dom.setAttribute('id', 'lightbox');
 		dom.innerHTML = '<button class="lightbox__close" id="lightboxClose">Fermer</button> <button class="lightbox__next">Suivant</button> <button class="lightbox__prev">Précédent</button> <div class="lightbox__container"><figure></figure></figure></div>'
 		dom.querySelector('.lightbox__close').addEventListener('click', this.close.bind(this));
 		dom.querySelector('.lightbox__next').addEventListener('click', this.next.bind(this));
