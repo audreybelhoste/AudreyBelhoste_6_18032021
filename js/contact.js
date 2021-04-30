@@ -8,6 +8,15 @@ const lastname = document.getElementById("lastname");
 const email = document.getElementById("email");
 const message = document.getElementById("message");
 const mainWrapper = document.querySelector("#main-wrapper");
+const focusableElementsArray = [
+	'button:not([disabled])',
+	'input:not([disabled])',
+	'textarea:not([disabled])',
+  ];
+
+const focusableElements = contactBg.querySelectorAll(focusableElementsArray);
+const firstFocusableElement = focusableElements[0];
+const lastFocusableElement = focusableElements[focusableElements.length - 1];
 
 contactBtn.addEventListener("click", function () {
 	document.body.classList.add('modalOpen');
@@ -15,7 +24,30 @@ contactBtn.addEventListener("click", function () {
 	contactBg.style.display = "block";
 	mainWrapper.setAttribute('aria-hidden', 'true');
 	contactBg.setAttribute('aria-hidden', 'false');
-	contactCloseBtn.focus();
+	firstFocusableElement.focus();
+		
+	focusableElements.forEach((focusableElement) => {
+		if (focusableElement.addEventListener) {
+			focusableElement.addEventListener('keydown', (event) => {
+  
+				if (!event.keyCode == 9) {
+					return;
+				}
+	
+				if (event.shiftKey) {
+					if (event.target === firstFocusableElement) { // shift + tab
+						event.preventDefault();
+	
+						lastFocusableElement.focus();
+					}
+				} else if (event.target === lastFocusableElement) { // tab
+					event.preventDefault();
+	
+					firstFocusableElement.focus();
+				}
+			});
+		}
+	});
 });
 
 contactCloseBtn.addEventListener("click", closeModal);
