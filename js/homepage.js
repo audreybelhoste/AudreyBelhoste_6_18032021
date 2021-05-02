@@ -126,18 +126,15 @@ function toggleNavSelectedTags() {
 			if(item.classList.contains('selected')){
 				tags.splice(tags.indexOf(item.getAttribute('data-filter-tag')), 1);
 				tagParams.splice(tagParams.indexOf(item.getAttribute('data-filter-tag')), 1);
-				console.log(tagParams);
 				document.querySelectorAll('.filterTag[data-filter-tag="' + item.getAttribute('data-filter-tag') + '"]').forEach(function(element){
 					element.classList.remove('selected')
 				});
 			} else {
 				tagParams.push(item.getAttribute('data-filter-tag'));
-				console.log(document.querySelectorAll('.filterTag[data-filter-tag="' + item.getAttribute('data-filter-tag') + '"]'));
 				document.querySelectorAll('.filterTag[data-filter-tag="' + item.getAttribute('data-filter-tag') + '"]').forEach(function(element){
 					element.classList.add('selected')
 				});
 				tags.push(item.getAttribute('data-filter-tag'));
-				console.log(tagParams);
 			}
 	
 			tagParams.forEach((tag, index) => {
