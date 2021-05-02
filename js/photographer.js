@@ -1,8 +1,11 @@
+// url of json file 
 const jsonFile = 'https://audreybelhoste.github.io/AudreyBelhoste_6_18032021/FishEyeDataFR.json'
 const url = new URLSearchParams(window.location.search);
 
+// call fetch(url) with default options
 fetch(jsonFile)
 .then(function(response) {
+	// convert response to json
 	return response.json(); 
 })
 .then(function(data) {
@@ -10,6 +13,7 @@ fetch(jsonFile)
 	showMedia(data);
 })
 
+// create DOM elements for photographer informations
 function showInformations(data){
 	var presentation = document.querySelector('#presentation');
 	var photographerPrice = document.querySelector('.info__price');
@@ -75,6 +79,7 @@ function showInformations(data){
 	}
 }
 
+// media factory
 function createAMedia(id, photographerId, link, tags, likes, date, price, alt){
 	if (link.split('.').pop() == 'jpg') {
 		return {
@@ -107,6 +112,7 @@ function createAMedia(id, photographerId, link, tags, likes, date, price, alt){
 
 var gallery = [];
 
+// create DOM elements for media
 function showMedia(data){
 	const filters = document.querySelectorAll(".filter__list__item");
 	const filterList = document.querySelector(".filter__list");
@@ -147,6 +153,7 @@ function showMedia(data){
 	createDOMGallery(gallery);
 }
 
+// order media by selected filter
 function orderBy(filter){
 
 	if(filter === 'popularity') {
@@ -167,6 +174,7 @@ function orderBy(filter){
 	createDOMGallery(gallery);
 }
 
+// create DOM elements for gallery
 function createDOMGallery(gallery){
 	var mediaSection = document.querySelector('#media');
 	var totalLikes = document.querySelector('.info__likes');
@@ -223,11 +231,13 @@ function createDOMGallery(gallery){
 	toggleLike(gallery, sumLikes);
 }
 
+// remove all elements from gallery
 function clearDOMGallery(){
 	var mediaSection = document.querySelector('#media');
 	mediaSection.innerHTML = '';
 }
 
+// add or remove like
 function toggleLike(gallery, sumLikes) {
 
 	const likes = document.querySelectorAll(".media__card__details__likes");
@@ -256,7 +266,8 @@ function toggleLike(gallery, sumLikes) {
 }
 
 class Lightbox {
-		
+	
+	// lunch modal event
 	static init () {
 		const links = Array.from(document.querySelectorAll(".media__card__container"));
 		links.forEach(function(link) {
@@ -272,6 +283,7 @@ class Lightbox {
 		})
 	}
 
+	// launch modal content
 	constructor(url, gallery) {
 		this.element = this.buildDOM(url);
 		this.loadImage(url);
@@ -284,6 +296,7 @@ class Lightbox {
 		const firstFocusableElement = focusableElements[0];
 		const lastFocusableElement = focusableElements[focusableElements.length - 1];
 		firstFocusableElement.focus();
+
 		focusableElements.forEach((focusableElement) => {
 			if (focusableElement.addEventListener) {
 				focusableElement.addEventListener('keydown', (event) => {

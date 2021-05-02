@@ -1,13 +1,17 @@
+// url of json file 
 const jsonFile = 'https://audreybelhoste.github.io/AudreyBelhoste_6_18032021/FishEyeDataFR.json'
 
+// call fetch(url) with default options
 fetch(jsonFile)
 .then(function(response) {
+	// convert response to json 
 	return response.json(); 
 })
 .then(function(data) {
 	showPhotographers(data);
 })
 
+// photographer factory
 function createAPhotographer(name, id, city, country, tags, tagline, price, portrait){
 	return {
 		name,
@@ -21,6 +25,7 @@ function createAPhotographer(name, id, city, country, tags, tagline, price, port
 	}
 }
 
+// create DOM elements
 function showPhotographers(data){
 	var main = document.querySelector('main');
 
@@ -98,20 +103,19 @@ function showPhotographers(data){
 	toggleNavSelectedTags();
 }
 
-var filters;
-
-let tags = [];
-let currentPath = window.location.href;
-const currentParams = new URL(currentPath).searchParams;
-let tagParams = (currentParams.get("tag")) ? currentParams.get("tag").split(',') : [];
-
+// manage selected tags with url get parameters
 function toggleNavSelectedTags() {
-	filters = document.querySelectorAll(".filterTag");
-	console.log(filters);
+	let tags = [];
+	let currentPath = window.location.href;
+	const currentParams = new URL(currentPath).searchParams;
+	let tagParams = (currentParams.get("tag")) ? currentParams.get("tag").split(',') : [];
+	const filters = document.querySelectorAll(".filterTag");
 
 	tagParams.forEach(function(item) {
 		tags.push(item);
-		document.querySelector('.header__navigation__item[data-filter-tag="' + item + '"]').classList.add('selected');
+		document.querySelectorAll('.filterTag[data-filter-tag="' + item + '"]').forEach(function(element){
+			element.classList.add('selected')
+		});
 	})
 
 	filters.forEach(function(item) {
@@ -150,8 +154,7 @@ function toggleNavSelectedTags() {
 	filterTag(tags);
 }
 
-
-
+// display photographers by selected tags
 function filterTag(tags) {
 	var items = document.querySelectorAll('.content__card');
 

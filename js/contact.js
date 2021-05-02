@@ -1,3 +1,4 @@
+// DOM Elements
 const contactBg = document.querySelector("#contact");
 const contactBtn = document.querySelector("#btnContact");
 const contactName = document.querySelector("#contactName");
@@ -12,13 +13,16 @@ const focusableElementsArray = [
 	'button:not([disabled])',
 	'input:not([disabled])',
 	'textarea:not([disabled])',
-  ];
-
+];
 const focusableElements = contactBg.querySelectorAll(focusableElementsArray);
 const firstFocusableElement = focusableElements[0];
 const lastFocusableElement = focusableElements[focusableElements.length - 1];
 
-contactBtn.addEventListener("click", function () {
+// launch modal event
+contactBtn.addEventListener("click", launchModal);
+
+// launch modal form
+function launchModal() {
 	document.body.classList.add('modalOpen');
 	contactName.textContent = "Contactez-moi " + contactBtn.getAttribute('data-name');
 	contactBg.style.display = "block";
@@ -44,10 +48,12 @@ contactBtn.addEventListener("click", function () {
 			});
 		}
 	});
-});
+}
 
+// close modal event
 contactCloseBtn.addEventListener("click", closeModal);
 
+// close modal form
 function closeModal() {
 	document.body.classList.remove('modalOpen');
 	contactBg.style.display = "none";
@@ -55,17 +61,20 @@ function closeModal() {
 	contactBg.setAttribute('arria-hidden', 'true');
 }
 
+// close modal keyboard event
 window.addEventListener('keydown', function (event) {
 	if (event.key === 'Escape') {
 		closeModal();
 	}
 })
 
+// sent form event
 form.addEventListener("submit", function(event){
 	event.preventDefault();
 	submitForm();
 })
 
+// display informations in console when form is send
 function submitForm() {
 	console.log("Nom: " + firstname.value + ", prénom: " + lastname.value + ", email: " + email.value + ", message: " + message.value);						
 }

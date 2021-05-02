@@ -425,6 +425,7 @@ html, body {
 }
 .header__logo {
   height: 28px;
+  display: block;
 }
 .header__logo img {
   height: 100%;
