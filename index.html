@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FishEye</title>
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+	<header class="header" role="banner">
+
+		<a class="skip-links" title="Passer au contenu" href="#content">Passer au contenu</a>
+
+		<div class="header__wrapper">
+			<a aria-label="Fisheye Home Page" href="#" class="header__logo">		
+				<img alt="Logo Fisheye" src="logo.svg">
+			</a>
+
+			<nav role="navigation" class="header__navigation" aria-label="photographer categories">
+				<ul>
+					<li class="header__navigation__item filterTag" data-filter-tag="portrait">
+						<a href="#">
+							<span aria-hidden="true">#Portrait</span>
+							<span class="sr-only">Tag portrait</span>
+						</a>
+						
+					</li>
+					<li class="header__navigation__item filterTag" data-filter-tag="art">
+						<a href="#">
+							<span aria-hidden="true">#Art</span>
+							<span class="sr-only">Tag art</span>
+						</a>
+					</li>
+					<li class="header__navigation__item filterTag" data-filter-tag="fashion">
+						<a href="#">
+							<span aria-hidden="true">#Fashion</span>
+							<span class="sr-only">Tag fashion</span>
+						</a>
+					</li>
+					<li class="header__navigation__item filterTag" data-filter-tag="architecture">
+						<a href="#">
+							<span aria-hidden="true">#Architecture</span>
+							<span class="sr-only">Tag architecture</span>
+						</a>
+					</li>
+					<li class="header__navigation__item filterTag" data-filter-tag="travel">
+						<a href="#">
+							<span aria-hidden="true">#Travel</span>
+							<span class="sr-only">Tag travel</span>
+						</a>
+					</li>
+					<li class="header__navigation__item filterTag" data-filter-tag="sport">
+						<a href="#">
+							<span aria-hidden="true">#Sport</span>
+							<span class="sr-only">Tag sport</span>
+						</a>
+					</li>
+					<li class="header__navigation__item filterTag" data-filter-tag="animals">
+						<a href="#">
+							<span aria-hidden="true">#Animals</span>
+							<span class="sr-only">Tag animals</span>
+						</a>
+					</li>
+					<li class="header__navigation__item filterTag" data-filter-tag="events">
+						<a href="#">
+							<span aria-hidden="true">#Events</span>
+							<span class="sr-only">Tag events</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+
+		</div>
+	</header>
+
+    <main class="content" id="content">
+		<h1 class="content__title">Nos photographes</h1>
+    </main>
+
+    <script src="./js/homepage.js"></script>
+</body>
+</html>

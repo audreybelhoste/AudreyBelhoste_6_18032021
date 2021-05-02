@@ -1,0 +1,124 @@
+.content{
+	margin: 0 auto;
+	flex-wrap: wrap;
+
+	@include laptop{
+		max-width: $container;
+		display: flex;
+		justify-content: flex-start;
+		margin: 100px auto;
+	}
+
+	&__title{
+		position: absolute; 
+		color: $brand-primary;
+		margin: 0;
+		font-size: 14px;
+		top: 50px;
+		right: 20px;
+
+		@extend .font-regular;
+
+		@include laptop{
+			right: 20px;
+			font-size: 30px;
+			top: 40px;
+		}
+
+		@include desktop{
+			right: calc((100% - #{$container}) / 2);
+			font-size: 36px;
+		}
+	}
+
+	&__card{
+		text-align: center;
+		width: 263px;
+		margin: 0 auto 30px;
+
+		@include laptop{
+			margin: 0 calc((100% - 3 * 263px) / 6) 30px;
+
+		}
+
+		&__image{
+			width: 200px;
+			height: 200px;
+			position: relative;
+			overflow: hidden;
+			border-radius: 50%;
+			margin: 0 auto;
+
+			img{
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		&__title{
+			font-size: 36px;
+			color: $brand-text-secondary;
+			margin: 20px 0 0;
+
+			@extend .font-regular;
+		}
+
+		&__location{
+			font-size: 13px;
+			color: $brand-primary;
+			margin: 0;
+		}
+
+		&__description{
+			font-size: 10px;
+			margin: 0;
+		}
+
+		&__price{
+			font-size: 9px;
+			margin: 0;
+		}
+
+		ul{
+			list-style: none;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			margin: 8px 0 0;
+			padding: 0;
+		}
+
+		&__tag{
+			border: 0.5px solid $brand-grey;
+			border-radius: 11px;
+			padding: 3px 7px; 
+			margin-right: 5px;
+			font-size: 12px;
+			color: $brand-primary;
+			margin-bottom: 6px;
+
+			a{
+				color: $brand-primary;
+				text-decoration: none;
+			}
+
+			&.selected, &:hover, &:focus{
+				background-color: $brand-primary2;
+				border: 0.5px solid $brand-primary2;
+
+				a{
+					color: $brand-light;
+				}
+			}
+		}
+	}
+
+	[data-toggle='on'] {
+		display:block;
+	  }
+	  
+	[data-toggle='off'] {
+		display:none;
+	}
+}

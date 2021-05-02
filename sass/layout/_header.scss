@@ -1,0 +1,101 @@
+.skip-links{
+	opacity: 0;
+	height: 0;
+	overflow: hidden;
+	font-size: 18px;
+	text-align: center;
+	padding: 6px 0;
+	background-color: $brand-secondary;
+	text-decoration: none;
+	color: $brand-text1;
+	display: block;
+	max-width: 170px;
+	margin: 0 auto;
+
+	@extend .font-bold;
+
+	&:focus{
+		opacity: 1;
+		height: auto;
+		margin: 4px auto;
+	}
+}
+
+.header{
+	max-width: $container;
+	margin: 0 auto;
+	padding: 40px 20px;
+
+	&__wrapper{
+		display: flex;
+		flex-direction: column;
+
+		@include laptop{
+			width: calc(100% - 300px);
+			align-items: center;
+			flex-direction: row;
+		}
+	}
+
+	&__logo{
+		height: 28px;
+		display: block;
+
+		img{
+			height: 100%;
+			object-fit: cover;
+		}
+
+		@include laptop{
+			height: 38px;
+		}
+	}
+
+	&__navigation{
+
+		margin-top: 40px;
+
+		@include laptop{
+			margin: 0 0 0 80px;
+		}
+
+		ul{
+			display: flex;
+			flex-wrap: wrap;
+			list-style: none;
+			padding: 0;
+			justify-content: center;
+			margin: 0;
+		}
+
+		&__item{
+			border: 0.5px solid $brand-grey;
+			border-radius: 11px;
+			padding: 3px 7px; 
+			margin-right: 5px;
+			font-size: 12px;
+			margin-bottom: 6px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			@extend .font-medium;
+
+			a{
+				color: $brand-primary;
+				text-decoration: none;
+			}
+
+			&:last-child{
+				margin-right: 0;
+			}
+
+			&.selected, &:hover, &:focus{
+				background-color: $brand-primary2;
+				border: 0.5px solid $brand-primary2;
+
+				a{
+					color: $brand-light;
+				}
+			}
+		}	
+	}
+}

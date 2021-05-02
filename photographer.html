@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>FishEye</title>
+
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+	<body>
+		<header class="header">
+			<a aria-label="Fisheye Home Page" href="index.html" class="header__logo">
+				<img alt="Logo Fisheye" src="logo.svg">
+			</a>
+		</header>
+		<main id="main-wrapper" aria-hidden="false">
+			<section id="presentation" class="presentation">
+				<div class="presentation__info">
+					<button class="presentation__info__contact btn" id="btnContact">Contactez-moi</button>
+				</div>
+			</section>
+
+			<section id="info" class="info">
+				<p class="info__likes"></p>
+				<p class="info__price"></p>
+			</section>
+
+			<section class="filter">
+				<span class="filter__label" id="orderBy" >Trier par</span>
+				<div class="filter__list" role="button" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="orderBy">
+					<button class="filter__list__item selected" name="popularity" tabindex="0" role="option" aria-activedescendant="true" aria-selected="true" >Popularité</button>
+					<button class="filter__list__item" name="date" tabindex="-1" role="option" aria-activedescendant="true" aria-selected="false">Date</button>
+					<button class="filter__list__item" name="title" tabindex="-1" role="option" aria-activedescendant="true" aria-selected="false">Titre</button>
+				</div>
+			</section>
+
+			<section id="media" class="media">
+			</section>		
+		</main>
+		<section id="contact" class="contact" aria-hidden="true" role="dialog">
+			<div class="contact__content">
+				<button class="contact__content__close" id="contactClose" aria-label="Fermer le formulaire de contact">Fermer</button>
+				<h1 class="contact__content__title" id="contactName"></h1>
+				<form id="form">
+					<div>
+						<label for="firstname">Prénom</label>
+						<input name="firstname" id="firstname" type="text" aria-labelledby="firstname">
+					</div>
+					<div>
+						<label for="lastname">Nom</label>
+						<input name="lastname" id="lastname" type="text" aria-labelledby="lastname">
+					</div>
+					<div>
+						<label for="email">Email</label>
+						<input name="email" id="email" type="email" aria-labelledby="email">
+					</div>
+					<div>
+						<label for="message">Votre message</label>
+						<textarea class="contact__content__email" name="message" id="message"></textarea>
+					</div>
+					<button class="contact__content__send btn">Envoyer</button>
+				</form>
+			</div>
+		</section>	
+		
+		<script src="./js/photographer.js"></script>
+		<script src="./js/contact.js"></script>
+	</body>
+</html>

@@ -1,0 +1,6 @@
+html, body {
+  @extend .font-DMsans, .font-regular;
+  font-size: 14px;
+  color: $brand-text1;
+  line-height: 1.5;
+}
