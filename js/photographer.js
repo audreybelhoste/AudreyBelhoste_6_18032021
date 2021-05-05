@@ -151,7 +151,7 @@ function showMedia(data){
 		})
 	})
 
-	createDOMGallery(gallery);
+	orderBy('popularity');
 }
 
 // order media by selected filter
