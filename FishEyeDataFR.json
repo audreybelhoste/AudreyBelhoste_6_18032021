@@ -1,26 +1,26 @@
 {
   "photographers": [
     {
-      "name": "Mimi Keel",
-      "id": 243,
-      "city": "London",
-      "country": "UK",
-      "tags": ["portrait", "events", "travel", "animals"],
-      "tagline": "Voir le beau dans le quotidien",
-      "price": 400,
-      "portrait": "MimiKeel.jpg",
-	  "alt": "Portrait de Mimi Keel"
+		"name": "Mimi Keel",
+		"id": 243,
+		"city": "London",
+		"country": "UK",
+		"tags": ["portrait", "events", "travel", "animals"],
+		"tagline": "Voir le beau dans le quotidien",
+		"price": 400,
+		"portrait": "MimiKeel.jpg",
+		"alt": "Portrait de Mimi Keel"
     },
     {
-      "name": "Ellie-Rose Wilkens",
-      "id": 930,
-      "city": "Paris",
-      "country": "France",
-      "tags": ["sport", "architecture"],
-      "tagline": "Capturer des compositions complexes",
-      "price": 250,
-      "portrait": "EllieRoseWilkens.jpg",
-	  "alt": "Portrait de Ellie-Rose Wilkens"
+		"name": "Ellie-Rose Wilkens",
+		"id": 930,
+		"city": "Paris",
+		"country": "France",
+		"tags": ["sport", "architecture"],
+		"tagline": "Capturer des compositions complexes",
+		"price": 250,
+		"portrait": "EllieRoseWilkens.jpg",
+		"alt": "Portrait de Ellie-Rose Wilkens"
     },
     {
       "name": "Tracy Galindo",

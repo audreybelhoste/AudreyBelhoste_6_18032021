@@ -68,7 +68,7 @@ function showInformations(data){
 			imageContainer.classList.add("presentation__image");
 
 			image.src = 'Sample Photos/Photographers ID Photos/' + photographers[i].portrait;
-			image.setAttribute('alt', photographers[i].name);
+			image.setAttribute('alt', photographers[i].alt);
 	
 			presentation.appendChild(blocInfo);
 			blocInfo.appendChild(name);

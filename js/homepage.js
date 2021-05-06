@@ -8,11 +8,12 @@ fetch(jsonFile)
 	return response.json(); 
 })
 .then(function(data) {
+	console.log(data);
 	showPhotographers(data);
 })
 
 // photographer factory
-function createAPhotographer(name, id, city, country, tags, tagline, price, portrait){
+function createAPhotographer(name, id, city, country, tags, tagline, price, portrait, alt){
 	return {
 		name,
 		id, 
@@ -21,7 +22,8 @@ function createAPhotographer(name, id, city, country, tags, tagline, price, port
 		tags, 
 		tagline, 
 		price, 
-		portrait
+		portrait, 
+		alt
 	}
 }
 
@@ -32,7 +34,7 @@ function showPhotographers(data){
 	var photographers = [];
 
 	data['photographers'].forEach(element => {
-		photographers.push(createAPhotographer(element.name, element.id, element.city, element.country, element.tags, element.tagline, element.price, element.portrait))
+		photographers.push(createAPhotographer(element.name, element.id, element.city, element.country, element.tags, element.tagline, element.price, element.portrait, element.alt))
 	});
 
 	var allTags = [];
@@ -54,9 +56,9 @@ function showPhotographers(data){
 		imageContainer.classList.add("content__card__image");
 
 		image.src = 'Sample Photos/Photographers ID Photos/' + photographers[i].portrait;
+		image.setAttribute('alt', photographers[i].alt);
 
 		link.setAttribute('href', 'photographer.html?id=' + photographers[i].id);
-		link.setAttribute('alt', ' ');
 
 		cardTitle.textContent = photographers[i].name;
 		cardTitle.classList.add("content__card__title");
