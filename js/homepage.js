@@ -8,7 +8,6 @@ fetch(jsonFile)
 	return response.json(); 
 })
 .then(function(data) {
-	console.log(data);
 	showPhotographers(data);
 })
 
