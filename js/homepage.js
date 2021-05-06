@@ -94,7 +94,6 @@ function showPhotographers(data){
 			if(!allTags.includes(tags[j])){
 				allTags.push(tags[j]);
 			}
-
 		}
 
 		main.appendChild(card);
