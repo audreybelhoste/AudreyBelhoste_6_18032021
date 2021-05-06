@@ -34,6 +34,8 @@ function showPhotographers(data){
 	data['photographers'].forEach(element => {
 		photographers.push(createAPhotographer(element.name, element.id, element.city, element.country, element.tags, element.tagline, element.price, element.portrait))
 	});
+
+	var allTags = [];
 	
 	for(var i = 0; i < photographers.length; i++){
 		var card = document.createElement('div');
@@ -69,6 +71,7 @@ function showPhotographers(data){
 		cardPrice.classList.add("content__card__price");
 
 		var tags = photographers[i].tags; 
+		
 		for (var j = 0; j < tags.length; j++){
 			var listItemContainer = document.createElement('li');
 			var listItemLink = document.createElement('a');
@@ -87,6 +90,10 @@ function showPhotographers(data){
 			listItemContainer.appendChild(listItemLink);
 			listItemLink.appendChild(listItem);
 			listItemLink.appendChild(listItemSr);
+ 
+			if(!allTags.includes(tags[j])){
+				allTags.push(tags[j]);
+			}
 		}
 
 		main.appendChild(card);
@@ -100,7 +107,33 @@ function showPhotographers(data){
 		card.appendChild(cardList);
 	}
 
+	displayTags(allTags);
+
 	toggleNavSelectedTags();
+}
+
+// display tags in navbar
+function displayTags(tags){
+	for (var j = 0; j < tags.length; j++){
+		var tagList = document.querySelector('#tagList');
+		var listItemContainer = document.createElement('li');
+		var listItemLink = document.createElement('a');
+		var listItem = document.createElement('span');
+		var listItemSr = document.createElement('span');
+
+		listItem.textContent = "#" + tags[j].charAt(0).toUpperCase() + tags[j].slice(1);
+		listItem.setAttribute('aria-hidden', 'true');
+		listItemSr.textContent = "Tag " + tags[j];
+		listItemSr.classList.add('sr-only');
+		listItemContainer.classList.add("header__navigation__item");
+		listItemContainer.classList.add("filterTag");
+		listItemContainer.setAttribute("data-filter-tag", tags[j]);
+		listItemLink.href = '#';
+		tagList.appendChild(listItemContainer);
+		listItemContainer.appendChild(listItemLink);
+		listItemLink.appendChild(listItem);
+		listItemLink.appendChild(listItemSr);
+	}
 }
 
 // manage selected tags with url get parameters

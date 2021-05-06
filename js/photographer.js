@@ -45,7 +45,8 @@ function showInformations(data){
 			description.textContent = photographers[i].tagline;
 			description.classList.add("presentation__info__description"); 
 	
-			var tags = photographers[i].tags; 
+			const tags = photographers[i].tags; 
+
 			for (var j = 0; j < tags.length; j++){
 				var listItemContainer = document.createElement('li');
 				var listItemLink = document.createElement('a');
@@ -67,6 +68,7 @@ function showInformations(data){
 			imageContainer.classList.add("presentation__image");
 
 			image.src = 'Sample Photos/Photographers ID Photos/' + photographers[i].portrait;
+			image.setAttribute('alt', photographers[i].name);
 	
 			presentation.appendChild(blocInfo);
 			blocInfo.appendChild(name);
@@ -77,6 +79,8 @@ function showInformations(data){
 			imageContainer.appendChild(image);
 		}
 	}
+
+	
 }
 
 // media factory
@@ -150,7 +154,7 @@ function showMedia(data){
 		})
 	})
 
-	createDOMGallery(gallery);
+	orderBy('popularity');
 }
 
 // order media by selected filter
@@ -158,13 +162,9 @@ function orderBy(filter){
 
 	if(filter === 'popularity') {
 		gallery.sort((a, b) => b.likes - a.likes);
-	}
-
-	if(filter === 'date') {
+	} else if (filter === 'date') {
 		gallery.sort((a, b) => b.date - a.date);
-	}
-
-	if(filter === 'title') {
+	} else if (filter === 'title') {
 		gallery.sort(function(a, b) {
 		return a.title.localeCompare(b.title)
 		})

@@ -944,6 +944,7 @@ html, body {
   display: block;
   width: 100%;
   text-align: left;
+  cursor: pointer;
 }
 .filter__list__item.selected {
   order: 1;
